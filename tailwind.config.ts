@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,22 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+                data: {
+                    blue: {
+                        light: '#33C3F0',
+                        DEFAULT: '#1EAEDB',
+                        dark: '#0E86A5'
+                    },
+                    gray: {
+                        lightest: '#F6F6F7',
+                        light: '#C8C8C9',
+                        DEFAULT: '#8A898C',
+                        dark: '#403E43',
+                        darkest: '#221F26'
+                    },
+                    accent: '#E83E8C'
+                },
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,12 +100,49 @@ export default {
 					to: {
 						height: '0'
 					}
-				}
+				},
+                'fade-in': {
+                    '0%': {
+                        opacity: '0',
+                        transform: 'translateY(10px)'
+                    },
+                    '100%': {
+                        opacity: '1',
+                        transform: 'translateY(0)'
+                    }
+                },
+                'fade-in-right': {
+                    '0%': {
+                        opacity: '0',
+                        transform: 'translateX(20px)'
+                    },
+                    '100%': {
+                        opacity: '1',
+                        transform: 'translateX(0)'
+                    }
+                },
+                'slide-in-bottom': {
+                    '0%': {
+                        opacity: '0',
+                        transform: 'translateY(20px)'
+                    },
+                    '100%': {
+                        opacity: '1',
+                        transform: 'translateY(0)'
+                    }
+                }
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+                'fade-in': 'fade-in 0.5s ease-out forwards',
+                'fade-in-right': 'fade-in-right 0.5s ease-out forwards',
+                'slide-in-bottom': 'slide-in-bottom 0.5s ease-out forwards'
+			},
+            fontFamily: {
+                sans: ['Inter', 'sans-serif'],
+                heading: ['Poppins', 'sans-serif']
+            }
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
