@@ -1,8 +1,7 @@
-
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Download, ExternalLink, Github, Linkedin, Mail } from "lucide-react";
+import { Download, ExternalLink, Github, Linkedin, Mail, Phone } from "lucide-react";
 import SkillProgress from "@/components/SkillProgress";
 import ProjectCard from "@/components/ProjectCard";
 import BlogPostCard from "@/components/BlogPostCard";
@@ -162,6 +161,13 @@ const Home = () => {
                 aria-label="Email"
               >
                 <Mail size={24} />
+              </a>
+              <a
+                href="tel:+1234567890"
+                className="text-data-gray hover:text-data-blue transition-colors"
+                aria-label="Phone"
+              >
+                <Phone size={24} />
               </a>
             </div>
           </div>
