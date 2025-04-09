@@ -1,6 +1,7 @@
-
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
+
+const RESUME_URL = "https://drive.google.com/file/d/1lq3EGCWc5GejTYHtBsz1h1ZeQCJSwllU/view?usp=drive_link";
 
 const Resume = () => {
   return (
@@ -13,9 +14,11 @@ const Resume = () => {
               My professional background and qualifications
             </p>
           </div>
-          <Button className="mt-4 md:mt-0" size="lg">
-            <Download className="mr-2 h-5 w-5" />
-            Download PDF
+          <Button asChild className="mt-4 md:mt-0" size="lg">
+            <a href={RESUME_URL} target="_blank" rel="noopener noreferrer">
+              <Download className="mr-2 h-5 w-5" />
+              Download PDF
+            </a>
           </Button>
         </div>
 

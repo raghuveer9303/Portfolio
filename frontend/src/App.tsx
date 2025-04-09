@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,6 +7,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import ChatBox from "@/components/ChatBox"; // Add this import
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import Blog from "./pages/Blog";
@@ -37,6 +37,7 @@ const App = () => (
             </Routes>
           </main>
           <Footer />
+          <ChatBox /> {/* Add the ChatBox component here */}
         </BrowserRouter>
       </TooltipProvider>
     </ThemeProvider>

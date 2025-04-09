@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,8 @@ import { Download, ExternalLink, Github, Linkedin, Mail } from "lucide-react";
 import SkillProgress from "@/components/SkillProgress";
 import ProjectCard from "@/components/ProjectCard";
 import BlogPostCard from "@/components/BlogPostCard";
+
+const RESUME_URL = "https://drive.google.com/file/d/1lq3EGCWc5GejTYHtBsz1h1ZeQCJSwllU/view?usp=drive_link";
 
 const Home = () => {
   // Sample data for mock projects
@@ -81,41 +82,48 @@ const Home = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-data-blue-dark to-data-blue py-20 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-        <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col md:flex-row items-center">
-          <div className="w-full md:w-1/2 text-white mb-10 md:mb-0 animate-fade-in">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              Hi, I'm Raghuveer Venkatesh
-            </h1>
-            <p className="text-xl md:text-2xl mb-6 text-white/90">
-              Data Professional & Software Engineer
-            </p>
-            <p className="text-lg mb-8 max-w-md text-white/80">
-              Specializing in data automation and building scalable software solutions.
-              Currently pursuing a Master's in Applied Data Science at Indiana University.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Button asChild size="lg" className="bg-white text-data-blue hover:bg-white/90">
-                <Link to="/contact">Get in Touch</Link>
-              </Button>
-              <Button asChild size="lg" className="bg-white text-data-blue hover:bg-white/90">
-                <Link to="/resume">View Resume</Link>
-              </Button>
-            </div>
-          </div>
-          <div className="w-full md:w-1/2 flex justify-center animate-fade-in-right">
-            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white/20">
-              <img 
-                src="/lovable-uploads/862c0c1b-9e1a-4acd-bebe-0b8925a7ca8e.png" 
-                alt="Raghuveer Venkatesh"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
+<section className="relative bg-[#008fb3] py-20 md:py-32 overflow-hidden">
+  {/* Background grid pattern with reduced opacity */}
+  <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+  
+  {/* Stylized image as background element with better blending */}
+  <div className="absolute right-0 top-0 h-full w-full md:w-1/2 overflow-hidden opacity-50">
+    <div className="relative w-full h-full transform scale-125 -translate-x--20 translate-y-20">
+      {/* Blue color overlay to match background */}
+      <div className="absolute inset-0 bg-[#008fb3] mix-blend-color opacity-10"></div>
+      
+      <img 
+        src="/lovable-uploads/862c0c1b-9e1a-4acd-bebe-0b8925a7ca8e.png" 
+        alt=""
+        className="w-full h-full object-cover object-center filter contrast-150 brightness-110 saturate-90 mix-blend-screen"
+        aria-hidden="true"
+      />
+    </div>
+  </div>
+  
+  <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col md:flex-row items-center">
+    <div className="w-full md:w-3/5 text-white mb-10 md:mb-0 animate-fade-in">
+      <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-shadow-sm">
+        Hi, I'm Raghuveer Venkatesh
+      </h1>
+      <p className="text-xl md:text-2xl mb-6 text-white/90 font-medium">
+        Data Professional & Software Engineer
+      </p>
+      <p className="text-lg mb-8 max-w-md text-white/80">
+        Specializing in data automation and building scalable software solutions.
+        Currently pursuing a Master's in Applied Data Science at Indiana University.
+      </p>
+      <div className="flex flex-wrap gap-4">
+        <Button asChild size="lg" className="bg-white text-[#4e7ca7] hover:bg-white/90">
+          <Link to="/contact">Get in Touch</Link>
+        </Button>
+        <Button asChild size="lg" className="bg-white text-[#4e7ca7] hover:bg-white/90">
+          <Link to="/resume">View Resume</Link>
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
       {/* About Me Section */}
       <section className="section-container" id="about">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -350,7 +358,7 @@ const Home = () => {
               <Link to="/contact">Get in Touch</Link>
             </Button>
             <Button asChild size="lg" className="border-white text-white hover:bg-white/10">
-              <a href="/resume.pdf" download>
+              <a href={RESUME_URL} target="_blank" rel="noopener noreferrer">
                 <Download className="mr-2 h-5 w-5" />
                 Download Resume
               </a>
