@@ -28,7 +28,7 @@ app.add_middleware(
 )
 
 # Initialize Qdrant client and collection name
-qdrant_client = QdrantClient(host="localhost", port=6333)  # Update with your Qdrant server details
+qdrant_client = QdrantClient(host="qdrant", port=6333)  # Update with your Qdrant server details
 collection_name = "resume_collection"
 
 # Initialize embeddings
@@ -71,7 +71,7 @@ async def upload_resume(file: UploadFile = File(...)):
         Qdrant.from_documents(
             documents=chunks,
             embedding=embeddings,
-            url="localhost",  # Update with your Qdrant server details
+            url="qdrant",  # Update with your Qdrant server details
             port=6333,
             collection_name=collection_name,
             prefer_grpc=True
@@ -105,14 +105,18 @@ async def chat(question: str = Form(...)):
         # Generate response using Gemini
         model = genai.GenerativeModel('gemini-2.0-flash')
         prompt = f"""
-        You are an AI assistant that helps with questions about a resume.
-        Use the following resume information to answer the question.
-        If you don't know the answer, say so.
-        
+        You are an AI assistant that represents the person whose resume information is provided below.
+        Answer all questions in the first person as if you are the resume owner.
+        For example, use "I", "me", "my" instead of the person's name or "the candidate".
+
         Resume information:
         {context}
-        
+
         Question: {question}
+
+        Remember to respond as if you are the person described in the resume, speaking directly to the person asking the question.
+
+        If you don't have enough information to answer the question, say please send an email to me at raghuveervenkatesh7@gmail.com and I will get back to you."
         """
         
         response = model.generate_content(prompt)
