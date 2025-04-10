@@ -5,33 +5,41 @@ from fastapi.responses import JSONResponse
 import google.generativeai as genai
 from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.vectorstores import Chroma
-from langchain.embeddings import VertexAIEmbeddings
+from langchain_community.vectorstores import Qdrant
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from qdrant_client import QdrantClient
 import tempfile
 
-# Initialize API key
-os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY", "your_api_key")
-genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+# Hardcoded API Key - replace with your actual key
+GEMINI_API_KEY = "AIzaSyBPS3MblzMA0tK1_h7aOFOKKJvaO1NOqqc"
+
+# Configure Gemini with hardcoded key
+genai.configure(api_key=GEMINI_API_KEY)
 
 app = FastAPI(title="Resume RAG API")
 
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins in development
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
-    allow_headers=["*"],  # Allows all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-# Initialize vector store
-vector_store = None
+# Initialize Qdrant client and collection name
+qdrant_client = QdrantClient(host="localhost", port=6333)  # Update with your Qdrant server details
+collection_name = "resume_collection"
+
+# Initialize embeddings
+embeddings = GoogleGenerativeAIEmbeddings(
+    model="models/embedding-001",
+    google_api_key=GEMINI_API_KEY
+)
 
 @app.post("/api/upload-resume")
 async def upload_resume(file: UploadFile = File(...)):
     """Upload and process a resume PDF"""
-    global vector_store
-    
     if not file.filename.endswith('.pdf'):
         raise HTTPException(status_code=400, detail="Only PDF files are supported")
     
@@ -53,14 +61,21 @@ async def upload_resume(file: UploadFile = File(...)):
         )
         chunks = text_splitter.split_documents(documents)
         
-        # Create embeddings and store in Chroma
-        embeddings = VertexAIEmbeddings()
-        vector_store = Chroma.from_documents(
+        # Create embeddings and store in Qdrant
+        # First delete existing collection if it exists
+        try:
+            qdrant_client.delete_collection(collection_name)
+        except:
+            pass  # Collection didn't exist
+        
+        Qdrant.from_documents(
             documents=chunks,
             embedding=embeddings,
-            persist_directory="./data/chroma_db"
+            url="localhost",  # Update with your Qdrant server details
+            port=6333,
+            collection_name=collection_name,
+            prefer_grpc=True
         )
-        vector_store.persist()
         
         return JSONResponse(content={"message": "Resume processed successfully"})
     except Exception as e:
@@ -72,18 +87,23 @@ async def upload_resume(file: UploadFile = File(...)):
 @app.post("/api/chat")
 async def chat(question: str = Form(...)):
     """Handle chat queries using RAG"""
-    global vector_store
-    
-    if not vector_store:
-        raise HTTPException(status_code=400, detail="No resume has been uploaded yet")
-    
     try:
+        # Initialize Qdrant vector store
+        vector_store = Qdrant(
+            client=qdrant_client,
+            collection_name=collection_name,
+            embeddings=embeddings
+        )
+        
         # Get relevant documents from vector store
         docs = vector_store.similarity_search(question, k=3)
+        if not docs:
+            return {"answer": "No resume information found. Please upload a resume first."}
+        
         context = "\n\n".join([doc.page_content for doc in docs])
         
         # Generate response using Gemini
-        model = genai.GenerativeModel('gemini-pro')
+        model = genai.GenerativeModel('gemini-2.0-flash')
         prompt = f"""
         You are an AI assistant that helps with questions about a resume.
         Use the following resume information to answer the question.

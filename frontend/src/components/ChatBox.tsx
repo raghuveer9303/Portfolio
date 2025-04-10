@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Send, X, MessageSquare } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface Message {
   text: string;
@@ -16,6 +17,7 @@ interface QuickQuestion {
 }
 
 const ChatBox: React.FC = () => {
+  const { toast } = useToast();
   // Set isOpen to true initially so it pops up on load
   const [isOpen, setIsOpen] = useState(true);
   const [message, setMessage] = useState("");
@@ -32,7 +34,7 @@ const ChatBox: React.FC = () => {
   // Quick question options
   const quickQuestions: QuickQuestion[] = [
     { text: "Your experience?", query: "What is your professional experience?" },
-    { text: "View projects?", query: "Show me your projects" },
+    { text: "View projects?", query: "Tell me about your projects" },
     { text: "Contact you?", query: "How can I contact you?" },
   ];
 
@@ -44,7 +46,7 @@ const ChatBox: React.FC = () => {
     setMessage(e.target.value);
   };
 
-  const processMessage = (text: string) => {
+  const processMessage = async (text: string) => {
     // Add user message
     const userMessage: Message = {
       text,
@@ -53,36 +55,54 @@ const ChatBox: React.FC = () => {
     };
     setMessages((prev) => [...prev, userMessage]);
     
-    // Simulate typing
+    // Set typing indicator
     setIsTyping(true);
 
-    // Simulate response (you can replace this with actual API call)
-    setTimeout(() => {
-      let responseText = "";
+    try {
+      // Send message to backend API
+      const formData = new FormData();
+      formData.append('question', text);
       
-      // Simple response logic - can be replaced with actual AI/API integration
-      if (text.toLowerCase().includes("experience")) {
-        responseText = "I have over 6 years of experience in software engineering and data automation. I've worked at Eurofins IT as a Senior Software Engineer, leading data automation initiatives and managing ETL processes across multiple platforms.";
-      } else if (text.toLowerCase().includes("project")) {
-        responseText = "My portfolio includes projects like a Sentiment Analysis Pipeline using Python and PySpark, a FIFA Striker Market Value Predictor using R, and various enterprise data automation solutions. You can check them all in the Projects section!";
-      } else if (text.toLowerCase().includes("contact")) {
-        responseText = "You can reach me through the Contact page, via email at raghuveervenkatesh7@gmail.com, or call me at (317)-417-8807. I'm currently based in Indianapolis, Indiana.";
-      } else if (text.toLowerCase().includes("skill")) {
-        responseText = "My key skills include Python, SQL, R, Azure DevOps, Docker, Git, Power BI, and data automation. I specialize in ETL processes, data pipelines, and software solutions.";
-      } else if (text.toLowerCase().includes("education")) {
-        responseText = "I'm pursuing a Master's in Applied Data Science at Indiana University Indianapolis (expected Dec 2025). I also hold a Bachelor's in Electronics and Computer Engineering from CMR Institute of Technology.";
-      } else {
-        responseText = "Thanks for your message! Is there anything specific about my background, projects, or skills you'd like to know more about?";
+      const response = await fetch('http://localhost:8000/api/chat', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to get answer from the server');
       }
-
+      
+      const data = await response.json();
+      
+      // Add bot response
       const botMessage: Message = {
-        text: responseText,
+        text: data.answer,
         isUser: false,
         timestamp: new Date(),
       };
+      
       setMessages((prevMessages) => [...prevMessages, botMessage]);
+    } catch (error) {
+      console.error("API error:", error);
+      
+      // Show error toast
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to connect to the server",
+        variant: "destructive",
+      });
+      
+      // Add error message as bot response
+      const errorMessage: Message = {
+        text: "Sorry, I encountered an error processing your request. Please try again later.",
+        isUser: false,
+        timestamp: new Date(),
+      };
+      
+      setMessages((prevMessages) => [...prevMessages, errorMessage]);
+    } finally {
       setIsTyping(false);
-    }, 1000);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -170,6 +190,7 @@ const ChatBox: React.FC = () => {
                 size="sm"
                 className="text-xs bg-secondary/50 border-data-blue/20 hover:bg-data-blue/10"
                 onClick={() => handleQuickQuestion(q.query)}
+                disabled={isTyping}
               >
                 {q.text}
               </Button>
@@ -183,8 +204,14 @@ const ChatBox: React.FC = () => {
                 value={message}
                 onChange={handleMessageChange}
                 className="flex-1"
+                disabled={isTyping}
               />
-              <Button type="submit" size="icon" className="bg-data-blue hover:bg-data-blue-dark">
+              <Button 
+                type="submit" 
+                size="icon" 
+                className="bg-data-blue hover:bg-data-blue-dark"
+                disabled={isTyping || message.trim() === ""}
+              >
                 <Send className="h-4 w-4" />
               </Button>
             </form>
