@@ -31,6 +31,8 @@ app.add_middleware(
 qdrant_client = QdrantClient(host="qdrant", port=6333)  # Update with your Qdrant server details
 collection_name = "resume_collection"
 
+collection_2 = "SII"
+
 # Initialize embeddings
 embeddings = GoogleGenerativeAIEmbeddings(
     model="models/embedding-001",
@@ -124,6 +126,47 @@ async def chat(question: str = Form(...)):
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error generating response: {str(e)}")
+
+
+@app.post("/api/chat-sii") 
+async def chat_sii(question: str = Form(...)):
+    """Handle chat queries for the Sports Innovation Institute using RAG"""
+    try:
+        # Initialize Qdrant vector store with SII collection
+        vector_store = Qdrant(
+            client=qdrant_client,
+            collection_name="SII",
+            embeddings=embeddings
+        )
+        
+        # Get relevant documents from vector store
+        docs = vector_store.similarity_search(question, k=3)
+        if not docs:
+            return {"answer": "Hey there! Jagz here. I don't have any information about the Sports Innovation Institute in my database. Please contact the institute directly via email at lwanless@iu.edu for more details."}
+        
+        context = "\n\n".join([doc.page_content for doc in docs])
+        
+        # Generate response using Gemini
+        model = genai.GenerativeModel('gemini-2.0-flash')
+        prompt = f"""
+        You are JAGZ, the friendly and knowledgeable mascot for the Indiana University (IU) Sports Innovation Institute.
+        Start your response with a brief greeting like 'Hey there! Jagz here.' or similar.
+        You are an expert on the Institute. Use the provided context to answer the user's question about IU Sports Innovation Institute.
+        If the context doesn't contain the answer, state that you don't have that specific information and politely ask the user to 
+        contact the institute directly via email at lwanless@iu.edu for more details. Be concise and helpful.
+        
+        Context:
+        {context}
+        
+        Question: {question}
+        """
+        
+        response = model.generate_content(prompt)
+        return {"answer": response.text}
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error generating response: {str(e)}")
+
 
 @app.get("/api/health")
 async def health_check():
