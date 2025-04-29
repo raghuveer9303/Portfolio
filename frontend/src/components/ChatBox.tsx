@@ -1,229 +1,131 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { MessageCircle, Send, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { Send, X, MessageSquare } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
-interface Message {
-  text: string;
-  isUser: boolean;
-  timestamp: Date;
-}
-
-interface QuickQuestion {
-  text: string;
-  query: string;
-}
-
-const ChatBox: React.FC = () => {
-  const { toast } = useToast();
-  // Set isOpen to true initially so it pops up on load
+const ChatBox = () => {
   const [isOpen, setIsOpen] = useState(true);
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      text: "Hi, I'm Raghuveer! Welcome to my portfolio website. How can I help you today?",
-      isUser: false,
-      timestamp: new Date(),
-    },
-  ]);
-  const [isTyping, setIsTyping] = useState(false);
+  const [messages, setMessages] = useState<{ text: string; isUser: boolean }[]>([]);
+  const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Quick question options
-  const quickQuestions: QuickQuestion[] = [
-    { text: "Your experience?", query: "What is your professional experience?" },
-    { text: "View projects?", query: "Tell me about your projects" },
-    { text: "Contact you?", query: "How can I contact you?" },
-  ];
-
-  const toggleChat = () => {
-    setIsOpen(!isOpen);
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMessage(e.target.value);
-  };
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
-  const processMessage = async (text: string) => {
+  const toggleChat = () => setIsOpen(!isOpen);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim() || isLoading) return;
+
     // Add user message
-    const userMessage: Message = {
-      text,
-      isUser: true,
-      timestamp: new Date(),
-    };
-    setMessages((prev) => [...prev, userMessage]);
-    
-    // Set typing indicator
-    setIsTyping(true);
+    setMessages(prev => [...prev, { text: input, isUser: true }]);
+    setInput("");
+    setIsLoading(true);
 
     try {
-      // Send message to backend API
       const formData = new FormData();
-      formData.append('question', text);
-      
-      const response = await fetch('http://localhost:8000/api/chat', {
+      formData.append('question', input);
+
+      const response = await fetch('https://raghuveervenkatesh.us/api/chat', {
         method: 'POST',
         body: formData,
       });
-      
+
       if (!response.ok) {
-        throw new Error('Failed to get answer from the server');
+        throw new Error('Failed to get response');
       }
-      
+
       const data = await response.json();
-      
-      // Add bot response
-      const botMessage: Message = {
+      setMessages(prev => [...prev, {
         text: data.answer,
-        isUser: false,
-        timestamp: new Date(),
-      };
-      
-      setMessages((prevMessages) => [...prevMessages, botMessage]);
+        isUser: false
+      }]);
     } catch (error) {
-      console.error("API error:", error);
-      
-      // Show error toast
-      toast({
-        title: "Error",
-        description: error instanceof Error ? error.message : "Failed to connect to the server",
-        variant: "destructive",
-      });
-      
-      // Add error message as bot response
-      const errorMessage: Message = {
-        text: "Sorry, I encountered an error processing your request. Please try again later.",
-        isUser: false,
-        timestamp: new Date(),
-      };
-      
-      setMessages((prevMessages) => [...prevMessages, errorMessage]);
+      setMessages(prev => [...prev, {
+        text: "An error occurred while processing your request. Please try again.",
+        isUser: false
+      }]);
     } finally {
-      setIsTyping(false);
+      setIsLoading(false);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (message.trim() === "") return;
-    
-    processMessage(message);
-    setMessage("");
-  };
-
-  const handleQuickQuestion = (query: string) => {
-    processMessage(query);
-  };
-
-  // Auto-scroll to bottom when new messages arrive
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
   return (
-    <div className="fixed bottom-6 right-6 z-50">
-      {isOpen ? (
-        <Card className="w-80 md:w-96 shadow-lg animate-fade-in-up border border-data-blue/20">
-          <CardHeader className="bg-data-blue text-white p-4 flex flex-row justify-between items-center">
-            <div className="flex items-center">
-              <MessageSquare className="mr-2 h-5 w-5" />
-              <h3 className="font-medium">Chat with Raghuveer</h3>
-            </div>
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={toggleChat}
-              className="h-8 w-8 rounded-full text-white hover:bg-white/20"
-            >
-              <X className="h-5 w-5" />
-            </Button>
-          </CardHeader>
-          <CardContent className="p-0">
-            <div className="h-80 overflow-y-auto p-4">
-              {messages.map((msg, index) => (
-                <div
-                  key={index}
-                  className={`mb-3 flex ${
-                    msg.isUser ? "justify-end" : "justify-start"
-                  }`}
-                >
-                  <div
-                    className={`max-w-[80%] rounded-lg px-4 py-2 ${
-                      msg.isUser
-                        ? "bg-data-blue text-white"
-                        : "bg-secondary text-foreground"
-                    }`}
-                  >
-                    <p className="text-sm">{msg.text}</p>
-                    <span className="text-xs opacity-70 mt-1 block">
-                      {msg.timestamp.toLocaleTimeString([], { 
-                        hour: '2-digit', 
-                        minute: '2-digit' 
-                      })}
-                    </span>
-                  </div>
-                </div>
-              ))}
-              {isTyping && (
-                <div className="mb-3 flex justify-start">
-                  <div className="max-w-[80%] rounded-lg px-4 py-2 bg-secondary text-foreground">
-                    <div className="flex space-x-1">
-                      <div className="typing-dot"></div>
-                      <div className="typing-dot animation-delay-200"></div>
-                      <div className="typing-dot animation-delay-400"></div>
-                    </div>
-                  </div>
-                </div>
-              )}
-              <div ref={messagesEndRef} />
-            </div>
-          </CardContent>
-          
-          {/* Quick questions buttons */}
-          <div className="px-3 py-2 border-t flex flex-wrap gap-2 justify-center">
-            {quickQuestions.map((q, index) => (
-              <Button
-                key={index}
-                variant="outline"
-                size="sm"
-                className="text-xs bg-secondary/50 border-data-blue/20 hover:bg-data-blue/10"
-                onClick={() => handleQuickQuestion(q.query)}
-                disabled={isTyping}
-              >
-                {q.text}
-              </Button>
-            ))}
+    <div className="fixed bottom-4 right-4 z-50">
+      {/* Chat Button */}
+      <Button
+        size="icon"
+        className={cn(
+          "h-12 w-12 rounded-full shadow-lg bg-primary hover:bg-primary-hover transition-all duration-300",
+          isOpen && "rotate-90"
+        )}
+        onClick={toggleChat}
+      >
+        {isOpen ? (
+          <X className="h-5 w-5 text-white" />
+        ) : (
+          <MessageCircle className="h-5 w-5 text-white" />
+        )}
+      </Button>
+
+      {/* Chat Window */}
+      {isOpen && (
+        <div className="absolute bottom-16 right-0 w-72 md:w-80 bg-card rounded-lg shadow-hover overflow-hidden animate-fade-in">
+          {/* Header */}
+          <div className="bg-primary p-3">
+            <h3 className="text-white font-medium text-sm">Chat with me</h3>
           </div>
-          
-          <CardFooter className="border-t p-2">
-            <form className="flex w-full gap-2" onSubmit={handleSubmit}>
-              <Input
+
+          {/* Messages */}
+          <div className="h-72 p-3 overflow-y-auto space-y-3">
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={cn(
+                  "max-w-[80%] p-2 rounded-lg text-sm",
+                  message.isUser
+                    ? "ml-auto bg-primary text-white rounded-br-none"
+                    : "bg-muted/10 text-black rounded-bl-none"
+                )}>
+                {message.text}
+              </div>
+            ))}
+            {messages.length === 0 && (
+              <div className="text-center text-black text-sm">
+                Hi There! Raghuveer here. How can I help you?
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Input */}
+          <form onSubmit={handleSubmit} className="p-3 border-t border-border">
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
                 placeholder="Type your message..."
-                value={message}
-                onChange={handleMessageChange}
-                className="flex-1"
-                disabled={isTyping}
+                className="flex-1 px-2 py-1.5 text-sm rounded-md bg-background border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-black placeholder:text-black/60"
               />
               <Button 
                 type="submit" 
-                size="icon" 
-                className="bg-data-blue hover:bg-data-blue-dark"
-                disabled={isTyping || message.trim() === ""}
+                size="icon"
+                className="bg-primary hover:bg-primary-hover h-8 w-8"
+                disabled={!input.trim() || isLoading}
               >
-                <Send className="h-4 w-4" />
+                <Send className="h-3.5 w-3.5" />
               </Button>
-            </form>
-          </CardFooter>
-        </Card>
-      ) : (
-        <Button
-          onClick={toggleChat}
-          className="w-12 h-12 rounded-full bg-data-blue hover:bg-data-blue-dark shadow-lg flex items-center justify-center"
-        >
-          <MessageSquare className="h-6 w-6" />
-        </Button>
+            </div>
+          </form>
+        </div>
       )}
     </div>
   );

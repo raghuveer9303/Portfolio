@@ -1,146 +1,120 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ThemeToggle } from "./ThemeToggle";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "./ThemeToggle";
+import { cn } from "@/lib/utils";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsOpen(!isOpen);
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-
-  const isActive = (path: string) => {
-    return location.pathname === path;
-  };
+  const navItems = [
+    { label: "Home", path: "/" },
+    { label: "Projects", path: "/projects" },
+    { label: "Blog", path: "/blog" },
+    { label: "Resume", path: "/resume" },
+    { label: "Contact", path: "/contact" },
+  ];
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/95 backdrop-blur-sm shadow-sm py-2"
-          : "bg-transparent py-4"
-      }`}
+      className={cn(
+        "fixed top-0 w-full z-50 transition-all duration-300",
+        isScrolled
+          ? "bg-background/80 backdrop-blur-md shadow-sm"
+          : "bg-transparent"
+      )}
     >
-      <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-        <Link to="/" className="text-xl font-bold flex items-center">
-          <span className="text-data-blue">Raghuveer</span>
-          <span className="text-data-accent">.dev</span>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-1">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="flex items-center justify-between h-16">
           <Link
             to="/"
-            className={`nav-link ${isActive("/") ? "active" : ""}`}
+            className="text-2xl font-heading font-bold text-foreground hover:text-primary transition-colors"
           >
-            Home
+            RV
           </Link>
-          <Link
-            to="/projects"
-            className={`nav-link ${isActive("/projects") ? "active" : ""}`}
-          >
-            Projects
-          </Link>
-          <Link
-            to="/blog"
-            className={`nav-link ${isActive("/blog") ? "active" : ""}`}
-          >
-            Blog
-          </Link>
-          <Link
-            to="/resume"
-            className={`nav-link ${isActive("/resume") ? "active" : ""}`}
-          >
-            Resume
-          </Link>
-          <Link
-            to="/contact"
-            className={`nav-link ${isActive("/contact") ? "active" : ""}`}
-          >
-            Contact
-          </Link>
-          <ThemeToggle />
-        </div>
 
-        {/* Mobile Menu Button */}
-        <div className="flex items-center md:hidden">
-          <ThemeToggle />
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={toggleMenu}
-            className="ml-2"
-            aria-label="Menu toggle"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </Button>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-1">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={cn(
+                  "px-4 py-2 rounded-md text-sm font-medium transition-colors",
+                  location.pathname === item.path
+                    ? "text-primary"
+                    : "text-black hover:text-primary"
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <ThemeToggle />
+          </div>
+
+          {/* Mobile Navigation Button */}
+          <div className="flex md:hidden items-center space-x-2">
+            <ThemeToggle />
+            <Button
+              variant="ghost"
+              size="icon"
+              className="relative text-foreground"
+              onClick={toggleMenu}
+              aria-label="Toggle Menu"
+            >
+              {isOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </Button>
+          </div>
         </div>
       </div>
 
       {/* Mobile Navigation Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-sm shadow-sm border-t">
-          <div className="container mx-auto px-4 py-4 flex flex-col space-y-3">
-            <Link
-              to="/"
-              className={`nav-link ${isActive("/") ? "active" : ""}`}
-              onClick={closeMenu}
-            >
-              Home
-            </Link>
-            <Link
-              to="/projects"
-              className={`nav-link ${isActive("/projects") ? "active" : ""}`}
-              onClick={closeMenu}
-            >
-              Projects
-            </Link>
-            <Link
-              to="/blog"
-              className={`nav-link ${isActive("/blog") ? "active" : ""}`}
-              onClick={closeMenu}
-            >
-              Blog
-            </Link>
-            <Link
-              to="/resume"
-              className={`nav-link ${isActive("/resume") ? "active" : ""}`}
-              onClick={closeMenu}
-            >
-              Resume
-            </Link>
-            <Link
-              to="/contact"
-              className={`nav-link ${isActive("/contact") ? "active" : ""}`}
-              onClick={closeMenu}
-            >
-              Contact
-            </Link>
+      <div
+        className={cn(
+          "md:hidden transition-all duration-300 ease-in-out",
+          isOpen
+            ? "h-screen bg-background"
+            : "h-0 invisible"
+        )}
+      >
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-col space-y-4">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={cn(
+                  "px-4 py-3 rounded-md text-base font-medium transition-colors",
+                  location.pathname === item.path
+                    ? "bg-primary/10 text-primary"
+                    : "text-black hover:bg-primary/5 hover:text-primary"
+                )}
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 };

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import ProjectCard from "@/components/ProjectCard";
@@ -78,53 +77,51 @@ const Projects = () => {
     : projects.filter(project => project.category === activeFilter);
 
   return (
-    <div className="pt-24 pb-16">
-      <div className="container mx-auto px-4 md:px-6">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">My Projects</h1>
-        <p className="text-xl text-muted-foreground mb-12 text-center max-w-2xl mx-auto">
-          A collection of my work across data automation, software engineering, and machine learning.
-        </p>
+    <div className="container mx-auto px-4 py-16 md:py-24">
+      <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">Projects</h1>
+      <p className="text-lg text-black text-center mb-12 max-w-2xl mx-auto">
+        A collection of my work across data automation, software engineering, and machine learning.
+      </p>
 
-        {/* Filter buttons */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={activeFilter === category ? "default" : "outline"}
-              onClick={() => setActiveFilter(category)}
-              className="mb-2"
-            >
-              {category}
-            </Button>
-          ))}
-        </div>
-
-        {/* Projects grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project, index) => (
-            <ProjectCard
-              key={project.title}
-              title={project.title}
-              description={project.description}
-              image={project.image}
-              imageAlt={project.imageAlt}
-              technologies={project.technologies}
-              github={project.github}
-              live={project.live}
-              delay={index * 100}
-              className="animate-fade-in"
-            />
-          ))}
-        </div>
-
-        {filteredProjects.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-xl text-muted-foreground">
-              No projects found in this category. Please check back later!
-            </p>
-          </div>
-        )}
+      {/* Filter buttons */}
+      <div className="flex flex-wrap justify-center gap-2 mb-12">
+        {categories.map((category) => (
+          <Button
+            key={category}
+            variant={activeFilter === category ? "default" : "outline"}
+            onClick={() => setActiveFilter(category)}
+            className="mb-2"
+          >
+            {category}
+          </Button>
+        ))}
       </div>
+
+      {/* Projects grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {filteredProjects.map((project, index) => (
+          <ProjectCard
+            key={project.title}
+            title={project.title}
+            description={project.description}
+            image={project.image}
+            imageAlt={project.imageAlt}
+            technologies={project.technologies}
+            github={project.github}
+            live={project.live}
+            delay={index * 100}
+            className="animate-fade-in"
+          />
+        ))}
+      </div>
+
+      {filteredProjects.length === 0 && (
+        <div className="text-center py-12">
+          <p className="text-xl text-muted-foreground">
+            No projects found in this category. Please check back later!
+          </p>
+        </div>
+      )}
     </div>
   );
 };
