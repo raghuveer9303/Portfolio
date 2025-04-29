@@ -31,6 +31,8 @@ app.add_middleware(
 qdrant_client = QdrantClient(host="qdrant", port=6333)  # Update with your Qdrant server details
 collection_name = "resume_collection"
 
+collection_2 = "SII"
+
 # Initialize embeddings
 embeddings = GoogleGenerativeAIEmbeddings(
     model="models/embedding-001",

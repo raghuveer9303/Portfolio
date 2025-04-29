@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +11,7 @@ interface SkillProgressProps {
 const SkillProgress = ({
   name,
   percentage,
-  color = "data-blue",
+  color = "#0A66C2",
   delay = 0
 }: SkillProgressProps) => {
   const [progress, setProgress] = useState(0);
@@ -26,18 +25,18 @@ const SkillProgress = ({
   }, [percentage, delay]);
 
   return (
-    <div className="mb-4">
-      <div className="flex justify-between mb-1">
-        <span className="font-medium">{name}</span>
-        <span className="text-data-gray">{progress}%</span>
+    <div className="mb-6">
+      <div className="flex justify-between mb-2">
+        <span className="text-foreground font-medium">{name}</span>
+        <span className="text-muted tabular-nums">{progress}%</span>
       </div>
-      <div className="h-2 bg-data-gray-lightest rounded-full overflow-hidden">
+      <div className="h-2.5 bg-muted/20 rounded-full overflow-hidden">
         <div
-          className={cn(`h-full transition-all duration-1000 ease-out bg-${color}`)}
+          className="h-full transition-all duration-1000 ease-out rounded-full"
           style={{ 
             width: `${progress}%`,
-            backgroundColor: color === "data-blue" ? "#1EAEDB" : 
-                             color === "data-accent" ? "#E83E8C" : color
+            backgroundColor: color === "data-blue" ? "#0A66C2" : 
+                           color === "data-accent" ? "#00C49A" : color
           }}
         ></div>
       </div>

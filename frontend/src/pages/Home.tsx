@@ -82,70 +82,71 @@ const Home = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-<section className="relative bg-[#008fb3] py-20 md:py-32 overflow-hidden">
-  {/* Background grid pattern with reduced opacity */}
-  <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-  
-  {/* Stylized image as background element with better blending */}
-  <div className="absolute right-0 top-0 h-full w-full md:w-1/2 overflow-hidden opacity-50">
-    <div className="relative w-full h-full transform scale-125 -translate-x--20 translate-y-20">
-      {/* Blue color overlay to match background */}
-      <div className="absolute inset-0 bg-[#008fb3] mix-blend-color opacity-10"></div>
-      
-      <img 
-        src="/lovable-uploads/862c0c1b-9e1a-4acd-bebe-0b8925a7ca8e.png" 
-        alt=""
-        className="w-full h-full object-cover object-center filter contrast-150 brightness-110 saturate-90 mix-blend-screen"
-        aria-hidden="true"
-      />
-    </div>
-  </div>
-  
-  <div className="container mx-auto px-4 md:px-6 relative z-10 flex flex-col md:flex-row items-center">
-    <div className="w-full md:w-3/5 text-white mb-10 md:mb-0 animate-fade-in">
-      <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4 text-shadow-sm">
-        Hi, I'm Raghuveer Venkatesh
-      </h1>
-      <p className="text-xl md:text-2xl mb-6 text-white/90 font-medium">
-        Data Professional & Software Engineer
-      </p>
-      <p className="text-lg mb-8 max-w-md text-white/80">
-        Specializing in data automation and building scalable software solutions.
-        Currently pursuing a Master's in Applied Data Science at Indiana University.
-      </p>
-      <div className="flex flex-wrap gap-4">
-        <Button asChild size="lg" className="bg-white text-[#4e7ca7] hover:bg-white/90">
-          <Link to="/contact">Get in Touch</Link>
-        </Button>
-        <Button asChild size="lg" className="bg-white text-[#4e7ca7] hover:bg-white/90">
-          <Link to="/resume">View Resume</Link>
-        </Button>
-      </div>
-    </div>
-  </div>
-</section>
+      <section className="relative bg-gradient-to-r from-primary to-secondary py-20 md:py-32 overflow-hidden">
+        {/* Background grid pattern with reduced opacity */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        
+        {/* Hero image */}
+        <div className="absolute right-0 top-0 h-full w-full md:w-1/2 overflow-hidden opacity-50">
+          <div className="relative w-full h-[120%] transform scale-80">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary mix-blend-color opacity-10"></div>
+            <img 
+              src="/lovable-uploads/862c0c1b-9e1a-4acd-bebe-0b8925a7ca8e.png" 
+              alt=""
+              className="w-full h-full object-cover object-top filter contrast-150 brightness-110 saturate-90 mix-blend-screen"
+              aria-hidden="true"
+            />
+          </div>
+        </div>
+        
+        <div className="container mx-auto px-4 md:px-6 relative z-10">
+          <div className="w-full md:w-3/5 text-white mb-10 md:mb-0 animate-fade-in">
+            <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-shadow-sm">
+              Hi, I'm Raghuveer Venkatesh
+            </h1>
+            <p className="text-xl md:text-2xl mb-6 text-white font-medium">
+              Data Professional & Software Engineer
+            </p>
+            <p className="text-lg mb-8 max-w-md text-white">
+              Specializing in data automation and building scalable software solutions.
+              Currently pursuing a Master's in Applied Data Science at Indiana University.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90 shadow-card hover:shadow-hover">
+                <Link to="/contact">Get in Touch</Link>
+              </Button>
+              <Button asChild size="lg" className="bg-transparent border-2 border-white text-white hover:bg-white/10">
+                <Link to="/resume">View Resume</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About Me Section */}
-      <section className="section-container" id="about">
+      <section className="section-container bg-background" id="about">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="animate-fade-in">
-            <h2 className="section-title">About Me</h2>
-            <p className="mb-4">
-              I'm a passionate data professional with a background in software engineering
-              and data automation. With over 6 years of experience in designing and 
-              implementing scalable data pipelines, ETL processes, and software solutions,
-              I specialize in turning complex data challenges into valuable insights.
-            </p>
-            <p className="mb-4">
-              Currently, I'm pursuing a Master's in Applied Data Science at Indiana 
-              University, Indianapolis, where I'm expanding my expertise in advanced 
-              statistical methods, machine learning, and big data technologies.
-            </p>
-            <p className="mb-6">
-              Previously, I worked as a Senior Software Engineer at Eurofins IT, where I led
-              data automation initiatives and developed solutions that dramatically improved
-              operational efficiency.
-            </p>
-            <div className="flex space-x-4">
+          <div className="animate-fade-in space-y-6">
+            <h2 className="section-title text-left">About Me</h2>
+            <div className="prose prose-lg text-black">
+              <p className="mb-4">
+                I'm a passionate data professional with a background in software engineering
+                and data automation. With over 6 years of experience in designing and 
+                implementing scalable data pipelines, ETL processes, and software solutions,
+                I specialize in turning complex data challenges into valuable insights.
+              </p>
+              <p className="mb-4">
+                Currently, I'm pursuing a Master's in Applied Data Science at Indiana 
+                University, Indianapolis, where I'm expanding my expertise in advanced 
+                statistical methods, machine learning, and big data technologies.
+              </p>
+              <p className="mb-6">
+                Previously, I worked as a Senior Software Engineer at Eurofins IT, where I led
+                data automation initiatives and developed solutions that dramatically improved
+                operational efficiency.
+              </p>
+            </div>
+            <div className="flex space-x-4 text-black hover:text-primary transition-colors">
               <a
                 href="https://github.com/raghuveer9303"
                 target="_blank"
@@ -174,9 +175,9 @@ const Home = () => {
             </div>
           </div>
           <div className="animate-slide-in-bottom">
-            <h3 className="text-2xl font-bold mb-6 text-data-gray-dark">Skills</h3>
+            <h3 className="text-2xl font-bold mb-6 text-black">Skills</h3>
             
-            <h4 className="font-bold mb-3 text-data-gray-dark">Programming Languages</h4>
+            <h4 className="font-bold mb-3 text-black">Programming Languages</h4>
             <div className="mb-6">
               {programmingSkills.map((skill, index) => (
                 <SkillProgress
@@ -188,7 +189,7 @@ const Home = () => {
               ))}
             </div>
             
-            <h4 className="font-bold mb-3 text-data-gray-dark">Tools & Platforms</h4>
+            <h4 className="font-bold mb-3 text-black">Tools & Platforms</h4>
             <div>
               {toolsSkills.map((skill, index) => (
                 <SkillProgress
@@ -212,13 +213,13 @@ const Home = () => {
           <div className="max-w-3xl mx-auto">
             <div className="timeline-item animate-fade-in">
               <div className="timeline-dot"></div>
-              <div className="timeline-date">July 2022 - August 2024</div>
-              <h3 className="timeline-title">Senior Software Engineer – Data Automation</h3>
-              <div className="timeline-organization">Eurofins IT, Bangalore, India</div>
-              <p className="mb-3">
+              <div className="timeline-date text-black">July 2022 - August 2024</div>
+              <h3 className="timeline-title text-black">Senior Software Engineer – Data Automation</h3>
+              <div className="timeline-organization text-black">Eurofins IT, Bangalore, India</div>
+              <p className="mb-3 text-black">
                 Led data automation initiatives and managed complex ETL processes across multiple platforms.
               </p>
-              <ul className="list-disc pl-5 mb-4 text-data-gray-dark">
+              <ul className="list-disc pl-5 mb-4 text-black">
                 <li>Designed and implemented data pipelines for 38 Azure tenants</li>
                 <li>Led a team of six engineers in data migration projects</li>
                 <li>Developed PowerApps solutions for internal data tracking</li>
@@ -227,13 +228,13 @@ const Home = () => {
             
             <div className="timeline-item animate-fade-in" style={{animationDelay: "300ms"}}>
               <div className="timeline-dot"></div>
-              <div className="timeline-date">June 2018 - June 2022</div>
-              <h3 className="timeline-title">Software Engineer</h3>
-              <div className="timeline-organization">Eurofins IT, Bangalore, India</div>
-              <p className="mb-3">
+              <div className="timeline-date text-black">June 2018 - June 2022</div>
+              <h3 className="timeline-title text-black">Software Engineer</h3>
+              <div className="timeline-organization text-black">Eurofins IT, Bangalore, India</div>
+              <p className="mb-3 text-black">
                 Developed software solutions and automated processes to improve operational efficiency.
               </p>
-              <ul className="list-disc pl-5 mb-4 text-data-gray-dark">
+              <ul className="list-disc pl-5 mb-4 text-black">
                 <li>Created scheduled jobs using Azure DevOps for log consolidation</li>
                 <li>Developed Eurofins travel request portal to streamline processes</li>
                 <li>Built dynamic email distribution systems for 60k+ users</li>
@@ -273,16 +274,16 @@ const Home = () => {
           <div className="max-w-3xl mx-auto space-y-12">
             <div className="bg-card rounded-lg p-6 shadow-sm animate-fade-in">
               <h3 className="text-xl font-bold mb-2">Master of Science, Applied Data Science</h3>
-              <p className="text-data-blue font-semibold">Indiana University Indianapolis, U.S.</p>
-              <p className="text-muted-foreground mb-4">Expected Dec 2025 - GPA 4.00/4.00</p>
-              <p className="font-medium">Relevant Coursework:</p>
-              <p className="text-muted-foreground">Python programming, Statistics in R, Database Design</p>
+              <p className="text-black font-semibold">Indiana University Indianapolis, U.S.</p>
+              <p className="text-black mb-4">Expected Dec 2025 - GPA 4.00/4.00</p>
+              <p className="font-medium text-black">Relevant Coursework:</p>
+              <p className="text-black">Python programming, Statistics in R, Database Design</p>
             </div>
             
             <div className="bg-card rounded-lg p-6 shadow-sm animate-fade-in" style={{animationDelay: "300ms"}}>
               <h3 className="text-xl font-bold mb-2">Bachelor of Engineering, Electronics and Computer Engineering</h3>
-              <p className="text-data-blue font-semibold">CMR Institute of Technology, Bangalore, India</p>
-              <p className="text-muted-foreground">Graduated Jan 2018</p>
+              <p className="text-black font-semibold">CMR Institute of Technology, Bangalore, India</p>
+              <p className="text-black">Graduated Jan 2018</p>
             </div>
           </div>
         </div>
@@ -295,29 +296,29 @@ const Home = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in">
             <h3 className="text-lg font-bold mb-2">Azure Fundamentals</h3>
-            <p className="text-data-blue font-semibold">Microsoft - AZ900</p>
+            <p className="text-black font-semibold">Microsoft - AZ900</p>
           </div>
           
           <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in" style={{animationDelay: "200ms"}}>
             <h3 className="text-lg font-bold mb-2">Certified ScrumMaster CSM®</h3>
-            <p className="text-data-blue font-semibold">Scrum Alliance</p>
+            <p className="text-black font-semibold">Scrum Alliance</p>
           </div>
           
           <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in" style={{animationDelay: "400ms"}}>
             <h3 className="text-lg font-bold mb-2">Python & Pandas Certificates</h3>
-            <p className="text-data-blue font-semibold">Kaggle</p>
+            <p className="text-black font-semibold">Kaggle</p>
           </div>
           
           <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in" style={{animationDelay: "600ms"}}>
             <h3 className="text-lg font-bold mb-2">Python 4* & SQL 2* Badges</h3>
-            <p className="text-data-blue font-semibold">HackerRank</p>
+            <p className="text-black font-semibold">HackerRank</p>
           </div>
           
           <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in" style={{animationDelay: "800ms"}}>
             <h3 className="text-lg font-bold mb-2">IBM Data Engineering Professional Certificates</h3>
-            <p className="text-data-blue font-semibold">Introduction to Data Engineering</p>
-            <p className="text-muted-foreground">Python Project for Data Engineering</p>
-            <p className="text-muted-foreground">Linux Commands and Shell Scripting</p>
+            <p className="text-black font-semibold">Introduction to Data Engineering</p>
+            <p className="text-black">Python Project for Data Engineering</p>
+            <p className="text-black">Linux Commands and Shell Scripting</p>
           </div>
         </div>
       </section>

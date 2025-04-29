@@ -1,7 +1,5 @@
-
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { Github, Link as LinkIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Github, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface ProjectCardProps {
   title: string;
@@ -11,8 +9,8 @@ interface ProjectCardProps {
   technologies: string[];
   github?: string;
   live?: string;
-  className?: string;
   delay?: number;
+  className?: string;
 }
 
 const ProjectCard = ({
@@ -23,62 +21,66 @@ const ProjectCard = ({
   technologies,
   github,
   live,
-  className,
-  delay = 0
+  delay = 0,
+  className
 }: ProjectCardProps) => {
   return (
-    <Card className={cn("overflow-hidden card-hover", className)} 
-          style={{animationDelay: `${delay}ms`}}>
-      <div className="relative h-48 overflow-hidden">
+    <div 
+      className="group rounded-xl bg-card shadow-card hover:shadow-hover transition-all duration-300 overflow-hidden"
+      style={{ animationDelay: `${delay}ms` }}
+    >
+      <div className="aspect-video overflow-hidden">
         <img
           src={image}
           alt={imageAlt}
-          className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
-      <CardHeader>
-        <h3 className="text-xl font-bold">{title}</h3>
-      </CardHeader>
-      <CardContent>
-        <p className="text-muted-foreground mb-4">{description}</p>
+      
+      <div className="p-6">
+        <h3 className="text-xl font-bold mb-2">{title}</h3>
+        <p className="text-black mb-4">{description}</p>
+        
         <div className="flex flex-wrap gap-2 mb-4">
-          {technologies.map((tech, index) => (
+          {technologies.map((tech) => (
             <span
-              key={index}
-              className="bg-secondary text-xs font-medium px-2.5 py-0.5 rounded"
+              key={tech}
+              className="text-xs px-3 py-1 rounded-full bg-primary/10 text-black"
             >
               {tech}
             </span>
           ))}
         </div>
-      </CardContent>
-      <CardFooter>
-        <div className="flex space-x-4">
+        
+        <div className="flex gap-3">
           {github && (
-            <a
-              href={github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-data-blue transition-colors"
-              aria-label="View source code on GitHub"
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              className="flex items-center gap-2 hover:bg-primary hover:text-primary-foreground"
             >
-              <Github size={20} />
-            </a>
+              <a href={github} target="_blank" rel="noopener noreferrer" className="text-black">
+                <Github className="w-4 h-4" />
+                Code
+              </a>
+            </Button>
           )}
           {live && (
-            <a
-              href={live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-data-blue transition-colors"
-              aria-label="View live project"
+            <Button
+              asChild
+              size="sm"
+              className="flex items-center gap-2 bg-primary hover:bg-primary-hover"
             >
-              <LinkIcon size={20} />
-            </a>
+              <a href={live} target="_blank" rel="noopener noreferrer" className="text-black">
+                <ExternalLink className="w-4 h-4" />
+                Live Demo
+              </a>
+            </Button>
           )}
         </div>
-      </CardFooter>
-    </Card>
+      </div>
+    </div>
   );
 };
 

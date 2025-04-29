@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -90,100 +89,98 @@ const Blog = () => {
   );
 
   return (
-    <div className="pt-24 pb-16">
-      <div className="container mx-auto px-4 md:px-6">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center">Blog</h1>
-        <p className="text-xl text-muted-foreground mb-8 text-center max-w-2xl mx-auto">
-          Thoughts, insights, and guides on data engineering, automation, and software development.
-        </p>
+    <div className="container mx-auto px-4 py-16 md:py-24">
+      <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">Blog</h1>
+      <p className="text-lg text-black text-center mb-12 max-w-2xl mx-auto">
+        Thoughts, insights, and experiences from my journey in data science and software engineering.
+      </p>
 
-        {/* Search and filter section */}
-        <div className="mb-12 max-w-md mx-auto">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={18} />
-            <Input
-              type="search"
-              placeholder="Search articles..."
-              className="pl-10"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
+      {/* Search and filter section */}
+      <div className="mb-12 max-w-md mx-auto">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" size={18} />
+          <Input
+            type="search"
+            placeholder="Search articles..."
+            className="pl-10"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+      </div>
+
+      {/* Tags/Categories */}
+      <div className="flex flex-wrap justify-center gap-2 mb-12">
+        {allCategories.map((category) => (
+          <Button
+            key={category}
+            variant="outline"
+            size="sm"
+            onClick={() => setSearchQuery(category)}
+            className="mb-2"
+          >
+            {category}
+          </Button>
+        ))}
+        {searchQuery && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setSearchQuery("")}
+            className="mb-2 text-muted-foreground"
+          >
+            Clear Filters
+          </Button>
+        )}
+      </div>
+
+      {/* Featured posts section (only show if not searching) */}
+      {!searchQuery && featuredPosts.length > 0 && (
+        <div className="mb-16">
+          <h2 className="text-2xl font-bold mb-6">Featured Posts</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {featuredPosts.map((post, index) => (
+              <BlogPostCard
+                key={post.slug}
+                {...post}
+                delay={index * 100}
+              />
+            ))}
           </div>
         </div>
+      )}
 
-        {/* Tags/Categories */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {allCategories.map((category) => (
-            <Button
-              key={category}
-              variant="outline"
-              size="sm"
-              onClick={() => setSearchQuery(category)}
-              className="mb-2"
-            >
-              {category}
-            </Button>
-          ))}
-          {searchQuery && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setSearchQuery("")}
-              className="mb-2 text-muted-foreground"
-            >
-              Clear Filters
-            </Button>
-          )}
+      {/* All posts grid */}
+      <div>
+        <h2 className="text-2xl font-bold mb-6">
+          {searchQuery ? "Search Results" : "All Posts"}
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredPosts
+            .filter(post => !searchQuery || !post.featured)
+            .map((post, index) => (
+              <BlogPostCard
+                key={post.slug}
+                {...post}
+                delay={index * 100}
+              />
+            ))}
         </div>
 
-        {/* Featured posts section (only show if not searching) */}
-        {!searchQuery && featuredPosts.length > 0 && (
-          <div className="mb-16">
-            <h2 className="text-2xl font-bold mb-6">Featured Posts</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {featuredPosts.map((post, index) => (
-                <BlogPostCard
-                  key={post.slug}
-                  {...post}
-                  delay={index * 100}
-                />
-              ))}
-            </div>
+        {filteredPosts.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-xl text-black">
+              No articles found matching your search criteria.
+            </p>
+            <Button 
+              variant="outline" 
+              className="mt-4"
+              onClick={() => setSearchQuery("")}
+            >
+              Clear Search
+            </Button>
           </div>
         )}
-
-        {/* All posts grid */}
-        <div>
-          <h2 className="text-2xl font-bold mb-6">
-            {searchQuery ? "Search Results" : "All Posts"}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredPosts
-              .filter(post => !searchQuery || !post.featured)
-              .map((post, index) => (
-                <BlogPostCard
-                  key={post.slug}
-                  {...post}
-                  delay={index * 100}
-                />
-              ))}
-          </div>
-
-          {filteredPosts.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-xl text-muted-foreground">
-                No articles found matching your search criteria.
-              </p>
-              <Button 
-                variant="outline" 
-                className="mt-4"
-                onClick={() => setSearchQuery("")}
-              >
-                Clear Search
-              </Button>
-            </div>
-          )}
-        </div>
       </div>
     </div>
   );
