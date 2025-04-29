@@ -63,7 +63,7 @@ const ChatBox: React.FC = () => {
       const formData = new FormData();
       formData.append('question', text);
       
-      const response = await fetch('http://localhost:8000/api/chat', {
+      const response = await fetch('https://raghuveervenkatesh.us/api/chat', {
         method: 'POST',
         body: formData,
       });
