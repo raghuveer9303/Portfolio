@@ -87,13 +87,13 @@ const Home = () => {
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         
         {/* Hero image */}
-        <div className="absolute right-0 top-0 h-full w-full md:w-1/2 overflow-hidden opacity-50">
-          <div className="relative w-full h-[120%] transform scale-80">
+        <div className="absolute right-0 top-0 h-full w-full md:w-1/2 overflow-hidden">
+          <div className="relative w-full h-full">
             <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary mix-blend-color opacity-10"></div>
             <img 
               src="/lovable-uploads/862c0c1b-9e1a-4acd-bebe-0b8925a7ca8e.png" 
               alt=""
-              className="w-full h-full object-cover object-top filter contrast-150 brightness-110 saturate-90 mix-blend-screen"
+              className="w-full h-full object-cover object-center max-h-[800px] transform scale-100 md:scale-110 transition-transform duration-300"
               aria-hidden="true"
             />
           </div>
