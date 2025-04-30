@@ -39,6 +39,54 @@ embeddings = GoogleGenerativeAIEmbeddings(
     google_api_key=GEMINI_API_KEY
 )
 
+
+@app.post("/api/upload-knowledge")
+async def upload_resume(file: UploadFile = File(...)):
+    """Upload and process a resume PDF"""
+    if not file.filename.endswith('.pdf'):
+        raise HTTPException(status_code=400, detail="Only PDF files are supported")
+    
+    # Save uploaded file temporarily
+    temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.pdf')
+    try:
+        contents = await file.read()
+        with open(temp_file.name, 'wb') as f:
+            f.write(contents)
+        
+        # Process the PDF
+        loader = PyPDFLoader(temp_file.name)
+        documents = loader.load()
+        
+        # Split text into chunks
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=1000,
+            chunk_overlap=200
+        )
+        chunks = text_splitter.split_documents(documents)
+        
+        # Create embeddings and store in Qdrant
+        # First delete existing collection if it exists
+        try:
+            qdrant_client.delete_collection('SII')
+        except:
+            pass  # Collection didn't exist
+        
+        Qdrant.from_documents(
+            documents=chunks,
+            embedding=embeddings,
+            url="qdrant",  # Update with your Qdrant server details
+            port=6333,
+            collection_name='SII',
+            prefer_grpc=True
+        )
+        
+        return JSONResponse(content={"message": "Knowledge processed successfully"})
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing PDF: {str(e)}")
+    finally:
+        # Clean up temp file
+        os.unlink(temp_file.name)
+
 @app.post("/api/upload-resume")
 async def upload_resume(file: UploadFile = File(...)):
     """Upload and process a resume PDF"""
@@ -149,12 +197,32 @@ async def chat_sii(question: str = Form(...)):
         # Generate response using Gemini
         model = genai.GenerativeModel('gemini-2.0-flash')
         prompt = f"""
-        You are JAGZ, the friendly and knowledgeable mascot for the Indiana University (IU) Sports Innovation Institute.
-        Start your response with a brief greeting like 'Hey there! Jagz here.' or similar.
-        You are an expert on the Institute. Use the provided context to answer the user's question about IU Sports Innovation Institute.
-        If the context doesn't contain the answer, state that you don't have that specific information and politely ask the user to 
-        contact the institute directly via email at lwanless@iu.edu for more details. Be concise and helpful.
-        
+        You are JAGZ, the friendly and knowledgeable virtual assistant for the Indiana University (IU) Sports Innovation Institute.
+
+        GREETING:
+        - Begin each response with a unique, enthusiastic greeting (e.g., "Hi there, sports innovation fan!" or "Welcome to IU Sports Innovation, I'm Jagz!")
+
+        INFORMATION HANDLING:
+        1. FIRST: Search the provided knowledge base for relevant information about the IU Sports Innovation Institute to answer the user's question.
+        2. SECOND: If the knowledge base doesn't contain the specific information:
+        - Use your general knowledge about sports innovation, academic institutes, or related topics to provide a helpful response
+        - Clearly indicate when you're providing general information versus retrieved information
+        3. THIRD: If you still cannot provide a satisfactory answer:
+        - Acknowledge the limitation politely
+        - Suggest contacting Dr. Liz Wanless directly at lwanless@iu.edu for more detailed information
+
+        RESPONSE STRUCTURE:
+        - Keep responses concise but informative
+        - Use bullet points or numbered lists for clarity when appropriate
+        - Highlight key information in **bold** when useful
+        - Maintain a friendly, enthusiastic tone consistent with a sports mascot personality
+        - End each response with a brief, encouraging sign-off
+
+        PERSONALITY:
+        - Friendly and approachable
+        - Enthusiastic about sports innovation
+        - Helpful and service-oriented
+        - Proud representative of IU and the Sports Innovation Institute
         Context:
         {context}
         
