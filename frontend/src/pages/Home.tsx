@@ -87,14 +87,13 @@ const Home = () => {
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         
         {/* Hero image */}
-        <div className="absolute right-0 top-0 h-full w-full md:w-1/2 overflow-hidden">
-          <div className="relative w-full h-full">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary mix-blend-color opacity-10"></div>
+        <div className="absolute right-0 top-0 h-full w-full lg:w-1/2 overflow-hidden hidden sm:block flex items-center justify-center">
+          <div className="relative w-full h-full flex items-center justify-center">
             <img 
-              src="/lovable-uploads/862c0c1b-9e1a-4acd-bebe-0b8925a7ca8e.png" 
-              alt=""
-              className="w-full h-full object-cover object-center max-h-[800px] transform scale-100 md:scale-110 transition-transform duration-300"
-              aria-hidden="true"
+              src="/lovable-uploads/862c0c1b-9e1a-4acd-bebe-0b8925a7ca8e-Photoroom.png" 
+              alt="Raghuveer Venkatesh"
+              className="w-full h-full object-contain object-top mx-auto scale-125 transition-transform duration-500 hover:scale-135 motion-safe:hover:scale-135"
+              loading="eager"
             />
           </div>
         </div>
