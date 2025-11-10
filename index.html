@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>raghuveer9303's Portfolio</title>
+    <style>
+/* Custom Styles for Raghuveer Venkatesh's Portfolio */
+.nav-link {
+    @apply text-slate-600 font-medium hover:text-quantum-violet transition-colors duration-200 relative;
+    padding-bottom: 4px;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: theme('colors.quantum-violet');
+    transition: width 0.3s ease-in-out;
+}
+.nav-link.active::after,
+.nav-link:hover::after {
+    width: 100%;
+}
+.nav-link-button {
+    @apply text-ghost-white bg-quantum-violet hover:bg-opacity-90 font-medium px-4 py-2 rounded-md transition-all duration-200;
+}
+.mobile-nav-link {
+    @apply block px-3 py-2 rounded-md text-base font-medium text-slate-600 hover:bg-slate-100;
+}
+
+.social-link {
+    @apply inline-flex items-center text-slate-600 hover:text-quantum-violet font-medium transition-colors duration-200;
+}
+
+.section-heading {
+    @apply text-3xl md:text-4xl font-sora font-bold text-oxford-blue text-center;
+}
+.section-heading-sm {
+    @apply text-2xl font-sora font-bold text-oxford-blue;
+}
+.timeline-dot {
+    @apply absolute -left-9 top-1 h-4 w-4 rounded-full bg-quantum-violet border-4 border-slate-50;
+}
+.project-card {
+    @apply bg-white p-6 rounded-lg border border-slate-200 transition-all duration-300 flex flex-col hover:border-quantum-violet/50;
+}
+.project-link {
+    @apply inline-flex items-center font-semibold text-quantum-violet hover:underline;
+}
+.skill-category-title {
+    @apply text-lg font-sora font-semibold text-oxford-blue flex items-center border-b-2 border-slate-200 pb-2;
+}
+.skill-badge {
+    @apply bg-slate-100 text-slate-700 text-sm font-medium px-3 py-1.5 rounded-md;
+}
+.cert-item {
+    @apply flex items-center text-slate-700;
+}
+.cert-item i {
+    @apply h-5 w-5 text-quantum-violet mr-3 flex-shrink-0;
+}
+
+.footer-button {
+    @apply inline-flex items-center px-6 py-3 border border-slate-500 text-base font-medium rounded-md text-ghost-white hover:bg-slate-700 hover:border-slate-700 transition-colors duration-200;
+}
+
+.animated-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animated-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+    </style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raghuveer Venkatesh - Applied Data Scientist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ghost-white': '#f8fafc',
+                        'slate-blue': '#1e293b',
+                        'oxford-blue': '#0f172a',
+                        'quantum-violet': '#8b5cf6',
+                        'data-cyan': '#06b6d4',
+                        'light-slate': '#cbd5e1',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'sora': ['Sora', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+<script>
+// Protection against unwanted navigation in iframe content
+(function() {
+    'use strict';
+    
+    // Prevent all navigation attempts
+    document.addEventListener('click', function(e) {
+        const target = e.target.closest('a');
+        if (target && target.href) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Navigation prevented for:', target.href);
+            return false;
+        }
+    }, true);
+    
+    // Prevent form submissions
+    document.addEventListener('submit', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Form submission prevented');
+        return false;
+    }, true);
+    
+    // Override window.open
+    const originalOpen = window.open;
+    window.open = function() {
+        console.log('window.open() prevented');
+        return null;
+    };
+    
+    // Prevent hash changes that could affect parent
+    window.addEventListener('hashchange', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Hash change prevented');
+        return false;
+    });
+})();
+</script></head>
+<body class="bg-white text-slate-blue font-inter">
+
+    <!-- Navigation -->
+    <header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#hero" class="flex items-baseline">
+                        <span class="text-xl font-sora font-bold text-oxford-blue">Raghuveer Venkatesh</span>
+                        <span class="ml-3 hidden sm:inline text-sm font-medium text-quantum-violet">Applied Data Scientist</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#experience" class="nav-link">Experience</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#education" class="nav-link">Education</a>
+                    <a href="#contact" class="nav-link-button">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="p-2 rounded-md text-slate-blue hover:bg-slate-100">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#experience" class="mobile-nav-link">Experience</a>
+                <a href="#projects" class="mobile-nav-link">Projects</a>
+                <a href="#skills" class="mobile-nav-link">Skills</a>
+                <a href="#education" class="mobile-nav-link">Education</a>
+                <a href="#contact" class="mobile-nav-link">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-16">
+        <!-- Hero Section -->
+        <section id="hero" class="scroll-mt-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="animate-fade-in-up">
+                        <h1 class="text-4xl md:text-5xl font-sora font-bold text-oxford-blue leading-tight">Applied Data Scientist & Automation Expert</h1>
+                        <p class="mt-4 text-lg text-slate-600">Master's candidate with extensive experience in designing scalable ETL pipelines, automating complex data processes, and leveraging cloud technologies to drive data-driven decisions and operational efficiency.</p>
+                        <div class="mt-8 flex flex-wrap gap-6 items-center">
+                             <a href="mailto:raghuveervenkatesh7@gmail.com" class="social-link"><i data-lucide="mail" class="h-5 w-5 mr-2"></i>Email</a>
+                             <a href="https://www.linkedin.com/in/raghuveervenkatesh" target="_blank" class="social-link"><i data-lucide="linkedin" class="h-5 w-5 mr-2"></i>LinkedIn</a>
+                             <a href="https://github.com/raghuveer9303" target="_blank" class="social-link"><i data-lucide="github" class="h-5 w-5 mr-2"></i>GitHub</a>
+                             <a href="tel:+13174178807" class="social-link"><i data-lucide="phone" class="h-5 w-5 mr-2"></i>Phone</a>
+                        </div>
+                    </div>
+                    <div class="flex justify-center items-center order-first md:order-last">
+                         <div class="w-64 h-64 md:w-80 md:h-80 rounded-full flex items-center justify-center ring-8 ring-slate-200">
+                             <span class="text-7xl font-bold text-slate-blue font-sora opacity-80">RV</span>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-24 bg-slate-50 scroll-mt-16 animated-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-heading">Professional Experience</h2>
+                <div class="mt-12 relative border-l-2 border-slate-200 pl-8 space-y-16">
+                    <!-- Job 1 -->
+                    <div class="relative">
+                        <div class="timeline-dot"></div>
+                        <p class="text-sm font-medium text-quantum-violet">July 2022 – August 2024</p>
+                        <h3 class="text-xl font-sora font-semibold text-oxford-blue mt-1">Senior Software Engineer – Data Automation</h3>
+                        <p class="text-md text-slate-500">Eurofins IT, Bangalore, India</p>
+                        <ul class="mt-4 space-y-3 text-slate-600">
+                            <li class="flex items-start"><i data-lucide="check-circle-2" class="h-5 w-5 text-quantum-violet mr-3 mt-1 flex-shrink-0"></i>Designed and implemented a scalable ETL data pipeline for 38 Azure tenants, centralizing data for integration, processing, and compliance reporting using Python, Azure Data Factory, and Power BI.</li>
+                            <li class="flex items-start"><i data-lucide="check-circle-2" class="h-5 w-5 text-quantum-violet mr-3 mt-1 flex-shrink-0"></i>Led a team of six as Scrum Master for a SharePoint data migration project, coordinating across multiple countries and delivering ahead of schedule.</li>
+                            <li class="flex items-start"><i data-lucide="check-circle-2" class="h-5 w-5 text-quantum-violet mr-3 mt-1 flex-shrink-0"></i>Developed a PowerApps app with SQL Stored Procedures, automating data entry across 146 locations and improving data consistency.</li>
+                            <li class="flex items-start"><i data-lucide="check-circle-2" class="h-5 w-5 text-quantum-violet mr-3 mt-1 flex-shrink-0"></i>Automated the migration of 6TB of unstructured data from on-premises SharePoint to Azure Blob Storage and SharePoint Online.</li>
+                             <li class="flex items-start"><i data-lucide="check-circle-2" class="h-5 w-5 text-quantum-violet mr-3 mt-1 flex-shrink-0"></i>Built M365 activity log ingestion pipelines, decreasing audit time by 70% and enhancing data governance.</li>
+                        </ul>
+                    </div>
+                    <!-- Job 2 -->
+                    <div class="relative">
+                        <div class="timeline-dot"></div>
+                        <p class="text-sm font-medium text-quantum-violet">June 2018 – June 2022</p>
+                        <h3 class="text-xl font-sora font-semibold text-oxford-blue mt-1">Software Engineer</h3>
+                        <p class="text-md text-slate-500">Eurofins IT, Bangalore, India</p>
+                        <ul class="mt-4 space-y-3 text-slate-600">
+                            <li class="flex items-start"><i data-lucide="check-circle-2" class="h-5 w-5 text-quantum-violet mr-3 mt-1 flex-shrink-0"></i>Deployed scheduled jobs with Azure DevOps to consolidate application logs from 18 distributed servers, enabling centralized processing.</li>
+                            <li class="flex items-start"><i data-lucide="check-circle-2" class="h-5 w-5 text-quantum-violet mr-3 mt-1 flex-shrink-0"></i>Developed a travel request portal that reduced processing time from 10 days to 3 and provided real-time reporting via PowerBI.</li>
+                            <li class="flex items-start"><i data-lucide="check-circle-2" class="h-5 w-5 text-quantum-violet mr-3 mt-1 flex-shrink-0"></i>Created a web app to manage dynamic email distribution lists (1600 entries), making them accessible to over 60,000 users.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-24 scroll-mt-16 animated-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-heading">Featured Projects</h2>
+                <div class="mt-12 grid md:grid-cols-2 gap-8">
+                    <!-- Project 1 -->
+                    <div class="project-card">
+                        <h3 class="text-xl font-sora font-semibold text-oxford-blue">Sentiment Analysis Pipeline</h3>
+                        <p class="mt-2 text-slate-600 flex-grow">Engineered a Python-based pipeline that scrapes Amazon & Peloton reviews using BeautifulSoup and PySpark, ingests data into PostgreSQL, and delivers interactive insights via a Streamlit dashboard.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                           <span class="skill-badge">Python</span><span class="skill-badge">PySpark</span><span class="skill-badge">PostgreSQL</span><span class="skill-badge">Streamlit</span><span class="skill-badge">ETL</span>
+                        </div>
+                        <div class="mt-6">
+                            <a href="https://github.com/raghuveer9303/Web-Scraper" target="_blank" class="project-link">
+                                <i data-lucide="github" class="h-5 w-5 mr-2"></i>View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Project 2 -->
+                    <div class="project-card">
+                        <h3 class="text-xl font-sora font-semibold text-oxford-blue">FIFA Striker Market Value Predictor</h3>
+                        <p class="mt-2 text-slate-600 flex-grow">Developed a regression model in R leveraging player performance, physical attributes, and stats to forecast football strikers' market value, empowering smarter scouting and investment decisions.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="skill-badge">R</span><span class="skill-badge">Regression</span><span class="skill-badge">Data Modeling</span><span class="skill-badge">Statistics</span>
+                        </div>
+                        <div class="mt-6">
+                            <a href="https://rpubs.com/Raghuveer_Venkatesh/1255695" target="_blank" class="project-link">
+                                <i data-lucide="line-chart" class="h-5 w-5 mr-2"></i>View Analysis
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-24 bg-slate-50 scroll-mt-16 animated-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-heading">Technical Skills & Competencies</h2>
+                <div class="mt-12 grid md:grid-cols-3 gap-10">
+                    <div>
+                        <h3 class="skill-category-title"><i data-lucide="code" class="h-6 w-6 mr-3 text-quantum-violet"></i>Programming Languages</h3>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                           <span class="skill-badge">Python</span><span class="skill-badge">SQL</span><span class="skill-badge">R</span><span class="skill-badge">PowerShell</span><span class="skill-badge">HTML/CSS</span><span class="skill-badge">JavaScript</span><span class="skill-badge">C#</span>
+                        </div>
+                    </div>
+                     <div>
+                        <h3 class="skill-category-title"><i data-lucide="database" class="h-6 w-6 mr-3 text-quantum-violet"></i>Tools & Platforms</h3>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                           <span class="skill-badge">Azure DevOps</span><span class="skill-badge">Docker</span><span class="skill-badge">Git</span><span class="skill-badge">Power BI</span><span class="skill-badge">Azure Data Factory</span><span class="skill-badge">Linux</span><span class="skill-badge">SharePoint</span>
+                        </div>
+                    </div>
+                     <div>
+                        <h3 class="skill-category-title"><i data-lucide="brain-circuit" class="h-6 w-6 mr-3 text-quantum-violet"></i>Core Competencies</h3>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                           <span class="skill-badge">ETL</span><span class="skill-badge">Automation</span><span class="skill-badge">Database Management</span><span class="skill-badge">Azure Cloud</span><span class="skill-badge">Data Visualization</span><span class="skill-badge">REST APIs</span><span class="skill-badge">Pandas & PySpark</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education & Certs Section -->
+        <section id="education" class="py-24 scroll-mt-16 animated-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-5 gap-12">
+                    <div class="lg:col-span-2">
+                        <h2 class="section-heading-sm">Education</h2>
+                        <div class="mt-6">
+                            <h3 class="text-lg font-sora font-semibold text-oxford-blue">Indiana University</h3>
+                            <p class="text-quantum-violet">Master of Science, Applied Data Science</p>
+                            <p class="text-sm text-slate-500">Expected Dec 2025 - GPA: 4.0/4.0</p>
+                        </div>
+                         <div class="mt-6">
+                            <h3 class="text-lg font-sora font-semibold text-oxford-blue">CMR Institute of Technology</h3>
+                            <p class="text-quantum-violet">Bachelor of Engineering, ECE</p>
+                            <p class="text-sm text-slate-500">Graduated Jan 2018</p>
+                        </div>
+                        <h2 class="section-heading-sm mt-12">Awards</h2>
+                        <div class="mt-6 bg-quantum-violet/10 p-4 rounded-lg">
+                             <div class="flex items-center">
+                                 <i data-lucide="award" class="h-8 w-8 text-quantum-violet mr-4"></i>
+                                 <div>
+                                     <h3 class="font-semibold text-oxford-blue">Eurofins Star Performer Award</h3>
+                                     <p class="text-sm text-slate-600">Q3-2019, Q3-2021, Q1-2023</p>
+                                 </div>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-3">
+                        <h2 class="section-heading-sm">Certifications</h2>
+                        <div class="mt-6 space-y-4">
+                           <div class="cert-item"><i data-lucide="shield-check"></i>IBM Certified Data Engineer Professional</div>
+                           <div class="cert-item"><i data-lucide="shield-check"></i>Microsoft Certified: Azure Fundamentals (AZ-900)</div>
+                           <div class="cert-item"><i data-lucide="shield-check"></i>Certified ScrumMaster (CSM®)</div>
+                           <div class="cert-item"><i data-lucide="shield-check"></i>Kaggle: Python & Pandas Certificates</div>
+                           <div class="cert-item"><i data-lucide="shield-check"></i>HackerRank: Python (4*) & SQL (2*) Badges</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer id="contact" class="bg-oxford-blue text-ghost-white scroll-mt-16">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+             <h2 class="text-3xl font-sora font-bold">Get in Touch</h2>
+             <p class="mt-4 max-w-2xl mx-auto text-slate-300">I'm currently seeking new opportunities in data science and engineering. Feel free to reach out if you'd like to discuss a project or role.</p>
+             <div class="mt-8 flex justify-center flex-wrap gap-4">
+                 <a href="mailto:raghuveervenkatesh7@gmail.com" class="footer-button">
+                     <i data-lucide="mail" class="h-5 w-5 mr-2"></i>
+                     raghuveervenkatesh7@gmail.com
+                 </a>
+                 <a href="https://www.linkedin.com/in/raghuveervenkatesh" target="_blank" class="footer-button">
+                     <i data-lucide="linkedin" class="h-5 w-5 mr-2"></i>
+                     LinkedIn Profile
+                 </a>
+             </div>
+             <p class="mt-10 text-sm text-slate-400">&copy; 2024 Raghuveer Venkatesh. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // --- Mobile Menu Toggle ---
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+    // Close mobile menu when a link is clicked
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+    });
+
+    // --- Active Nav Link on Scroll ---
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('header .nav-link');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.4
+    };
+
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === entry.target.id) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        sectionObserver.observe(section);
+    });
+
+    // --- Animate Sections on Scroll ---
+    const animatedSections = document.querySelectorAll('.animated-section');
+    const animationObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    animatedSections.forEach(section => {
+        animationObserver.observe(section);
+    });
+
+});
+    </script>
+</body>
+</html>
