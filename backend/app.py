@@ -1,20 +1,28 @@
 import os
+import tempfile
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-import google.generativeai as genai
 from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Qdrant
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from qdrant_client import QdrantClient
-import tempfile
+from dotenv import load_dotenv
+from groq import Groq
 
-# Hardcoded API Key - replace with your actual key
-GEMINI_API_KEY = "AIzaSyBPS3MblzMA0tK1_h7aOFOKKJvaO1NOqqc"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+load_dotenv(os.path.join(BASE_DIR, ".env"))
 
-# Configure Gemini with hardcoded key
-genai.configure(api_key=GEMINI_API_KEY)
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+if not GOOGLE_API_KEY:
+    raise RuntimeError("GOOGLE_API_KEY is not set")
+
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+if not GROQ_API_KEY:
+    raise RuntimeError("GROQ_API_KEY is not set")
+
+groq_client = Groq(api_key=GROQ_API_KEY)
 
 app = FastAPI(title="Resume RAG API")
 
@@ -36,7 +44,7 @@ collection_2 = "SII"
 # Initialize embeddings
 embeddings = GoogleGenerativeAIEmbeddings(
     model="models/embedding-001",
-    google_api_key=GEMINI_API_KEY
+    google_api_key=GOOGLE_API_KEY
 )
 
 
@@ -152,8 +160,7 @@ async def chat(question: str = Form(...)):
         
         context = "\n\n".join([doc.page_content for doc in docs])
         
-        # Generate response using Gemini
-        model = genai.GenerativeModel('gemini-2.0-flash')
+        # Generate response using Groq
         prompt = f"""
         You are an AI assistant that represents the person whose resume information is provided below.
         Answer all questions in the first person as if you are the resume owner.
@@ -168,69 +175,18 @@ async def chat(question: str = Form(...)):
 
         If you don't have enough information to answer the question, say please send an email to me at raghuveervenkatesh7@gmail.com and I will get back to you."
         """
-        
-        response = model.generate_content(prompt)
-        return {"answer": response.text}
-    
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error generating response: {str(e)}")
 
-
-@app.post("/api/chat-sii") 
-async def chat_sii(question: str = Form(...)):
-    """Handle chat queries for the Sports Innovation Institute using RAG"""
-    try:
-        # Initialize Qdrant vector store with SII collection
-        vector_store = Qdrant(
-            client=qdrant_client,
-            collection_name="SII",
-            embeddings=embeddings
+        chat_completion = groq_client.chat.completions.create(
+            model="llama-3.3-70b-versatile",
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
         )
-        
-        # Get relevant documents from vector store
-        docs = vector_store.similarity_search(question, k=3)
-        if not docs:
-            return {"answer": "Hey there! Jagz here. I don't have any information about the Sports Innovation Institute in my database. Please contact the institute directly via email at lwanless@iu.edu for more details."}
-        
-        context = "\n\n".join([doc.page_content for doc in docs])
-        
-        # Generate response using Gemini
-        model = genai.GenerativeModel('gemini-2.0-flash')
-        prompt = f"""
-        You are JAGZ, the friendly and knowledgeable virtual assistant for the Indiana University (IU) Sports Innovation Institute.
-
-        GREETING:
-        - Begin each response with a unique, enthusiastic greeting (e.g., "Hi there, sports innovation fan!" or "Welcome to IU Sports Innovation, I'm Jagz!")
-
-        INFORMATION HANDLING:
-        1. FIRST: Search the provided knowledge base for relevant information about the IU Sports Innovation Institute to answer the user's question.
-        2. SECOND: If the knowledge base doesn't contain the specific information:
-        - Use your general knowledge about sports innovation, academic institutes, or related topics to provide a helpful response
-        - Clearly indicate when you're providing general information versus retrieved information
-        3. THIRD: If you still cannot provide a satisfactory answer:
-        - Acknowledge the limitation politely
-        - Suggest contacting Dr. Liz Wanless directly at lwanless@iu.edu for more detailed information
-
-        RESPONSE STRUCTURE:
-        - Keep responses concise but informative
-        - Use bullet points or numbered lists for clarity when appropriate
-        - Highlight key information in **bold** when useful
-        - Maintain a friendly, enthusiastic tone consistent with a sports mascot personality
-        - End each response with a brief, encouraging sign-off
-
-        PERSONALITY:
-        - Friendly and approachable
-        - Enthusiastic about sports innovation
-        - Helpful and service-oriented
-        - Proud representative of IU and the Sports Innovation Institute
-        Context:
-        {context}
-        
-        Question: {question}
-        """
-        
-        response = model.generate_content(prompt)
-        return {"answer": response.text}
+        answer = chat_completion.choices[0].message.content
+        return {"answer": answer}
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error generating response: {str(e)}")
