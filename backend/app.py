@@ -1,4 +1,5 @@
 import os
+import traceback
 import tempfile
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -187,6 +188,7 @@ async def chat(question: str = Form(...)):
         return {"answer": answer}
     
     except Exception as e:
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error generating response: {str(e)}")
 
 

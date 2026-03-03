@@ -40,7 +40,7 @@ services:
       start_period: 30s
 
   qdrant:
-    image: qdrant/qdrant:latest
+    image: qdrant/qdrant:v1.13.6
     ports:
       - "6333:6333"
       - "6334:6334"
