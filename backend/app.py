@@ -43,7 +43,7 @@ collection_2 = "SII"
 
 # Initialize embeddings
 embeddings = GoogleGenerativeAIEmbeddings(
-    model="gemini-embedding-001",
+    model="text-embedding-005",
     google_api_key=GOOGLE_API_KEY
 )
 
