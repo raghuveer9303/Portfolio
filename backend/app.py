@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import Qdrant
+from langchain_qdrant import QdrantVectorStore
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from qdrant_client import QdrantClient
 from dotenv import load_dotenv
@@ -43,7 +43,7 @@ collection_2 = "SII"
 
 # Initialize embeddings
 embeddings = GoogleGenerativeAIEmbeddings(
-    model="text-embedding-005",
+    model="gemini-embedding-001",
     google_api_key=GOOGLE_API_KEY
 )
 
@@ -79,13 +79,12 @@ async def upload_resume(file: UploadFile = File(...)):
         except:
             pass  # Collection didn't exist
         
-        Qdrant.from_documents(
+        QdrantVectorStore.from_documents(
             documents=chunks,
             embedding=embeddings,
-            url="qdrant",  # Update with your Qdrant server details
-            port=6333,
+            url="http://qdrant:6333",
             collection_name='SII',
-            prefer_grpc=True
+            prefer_grpc=True,
         )
         
         return JSONResponse(content={"message": "Knowledge processed successfully"})
@@ -126,13 +125,12 @@ async def upload_resume(file: UploadFile = File(...)):
         except:
             pass  # Collection didn't exist
         
-        Qdrant.from_documents(
+        QdrantVectorStore.from_documents(
             documents=chunks,
             embedding=embeddings,
-            url="qdrant",  # Update with your Qdrant server details
-            port=6333,
+            url="http://qdrant:6333",
             collection_name=collection_name,
-            prefer_grpc=True
+            prefer_grpc=True,
         )
         
         return JSONResponse(content={"message": "Resume processed successfully"})
@@ -147,10 +145,10 @@ async def chat(question: str = Form(...)):
     """Handle chat queries using RAG"""
     try:
         # Initialize Qdrant vector store
-        vector_store = Qdrant(
+        vector_store = QdrantVectorStore(
             client=qdrant_client,
             collection_name=collection_name,
-            embeddings=embeddings
+            embedding=embeddings,
         )
         
         # Get relevant documents from vector store
