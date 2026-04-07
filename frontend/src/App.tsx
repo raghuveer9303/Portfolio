@@ -10,7 +10,6 @@ import ScrollToTop from "@/components/ScrollToTop";
 import ChatBox from "@/components/ChatBox"; // Add this import
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
-import Blog from "./pages/Blog";
 import Resume from "./pages/Resume";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
@@ -30,7 +29,6 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/projects" element={<Projects />} />
-              <Route path="/blog" element={<Blog />} />
               <Route path="/resume" element={<Resume />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />

@@ -4,79 +4,67 @@ import { Button } from "@/components/ui/button";
 import { Download, ExternalLink, Github, Linkedin, Mail } from "lucide-react";
 import SkillProgress from "@/components/SkillProgress";
 import ProjectCard from "@/components/ProjectCard";
-import BlogPostCard from "@/components/BlogPostCard";
 
 const RESUME_URL = "https://drive.google.com/file/d/1lq3EGCWc5GejTYHtBsz1h1ZeQCJSwllU/view?usp=drive_link";
 
 const Home = () => {
-  // Sample data for mock projects
+  // Featured Projects
   const projects = [
     {
-      title: "Sentiment Analysis Pipeline",
-      description: "A Python-based sentiment analysis pipeline that scraped Amazon & Peloton reviews using BeautifulSoup and PySpark.",
+      title: "Chicago Crime Safe City Platform",
+      description: "End-to-end data infra & platform turning 20 years of crime data into predictive risk models & a Graph RAG assistant.",
       image: "/placeholder.svg",
-      imageAlt: "Sentiment Analysis Project",
-      technologies: ["Python", "PySpark", "BeautifulSoup", "PostgreSQL", "Streamlit"],
-      github: "https://github.com/raghuveer9303/Web-Scraper",
-      live: "",
+      imageAlt: "Chicago Crime Dashboard",
+      technologies: ["BigQuery", "Airflow", "Neo4j", "LangGraph", "React"],
+      github: "https://github.com/raghuveer9303/Chicago-Crime-Safe-City",
+      live: "https://chicagocrimeproject.raghuveervenkatesh.us",
     },
     {
-      title: "FIFA Striker Market Value Predictor",
-      description: "A regression model leveraging player performance, physical attributes, and stats to forecast football strikers' market value.",
+      title: "NYC Metropulse GBFS",
+      description: "Real-time predictive analytics platform preventing empty docks and full stations across NYC bikeshare.",
       image: "/placeholder.svg",
-      imageAlt: "FIFA Striker Value Predictor",
-      technologies: ["R", "Statistics", "Regression", "Data Analysis"],
-      github: "",
-      live: "https://rpubs.com/Raghuveer_Venkatesh/1255695",
+      imageAlt: "NYC Metropulse GBFS Dashboard",
+      technologies: ["Spark Streaming", "Kafka", "Airflow", "LSTM", "PostGIS"],
+      github: "https://github.com/raghuveer9303/nyc-metropulse",
+      live: "https://citibikeproject.raghuveervenkatesh.us",
+    },
+    {
+      title: "DentaVision",
+      description: "Real-time AI-based dental condition classification from uploaded oral images using Vision Transformers.",
+      image: "/placeholder.svg",
+      imageAlt: "DentaVision App",
+      technologies: ["PyTorch", "ViT", "FastAPI", "React"],
+      github: "https://github.com/raghuveer9303/DentaVision",
+      live: "https://dentalvision.onrender.com/",
+    },
+    {
+      title: "TaxiPulse",
+      description: "Geospatial analytics dashboard optimizing profitable routes and time windows for NYC taxi drivers.",
+      image: "/placeholder.svg",
+      imageAlt: "TaxiPulse Dashboard",
+      technologies: ["Dash", "Plotly", "GeoPandas", "Folium", "Docker"],
+      github: "https://github.com/raghuveer9303/TaxiPulse",
+      live: "https://taxipulse.onrender.com",
     },
   ];
 
-  // Sample data for mock blog posts
-  const blogPosts = [
-    {
-      title: "The Future of Data Automation",
-      excerpt: "Exploring how AI and machine learning are transforming data automation processes in modern enterprises.",
-      date: "April 1, 2025",
-      image: "/placeholder.svg",
-      readingTime: "5 min read",
-      slug: "future-data-automation",
-      categories: ["Data", "Automation", "AI"],
-    },
-    {
-      title: "Building Efficient ETL Pipelines",
-      excerpt: "Best practices and tools for creating scalable and maintainable ETL pipelines for big data processing.",
-      date: "March 25, 2025",
-      image: "/placeholder.svg",
-      readingTime: "8 min read",
-      slug: "efficient-etl-pipelines",
-      categories: ["ETL", "Data Engineering", "Python"],
-    },
-    {
-      title: "Data Migration Strategies",
-      excerpt: "Key considerations and approaches for successful data migration projects across distributed systems.",
-      date: "March 10, 2025",
-      image: "/placeholder.svg",
-      readingTime: "6 min read",
-      slug: "data-migration-strategies",
-      categories: ["Data Migration", "Best Practices"],
-    },
-  ];
+
 
   // Mock skills data
   const programmingSkills = [
-    { name: "Python", percentage: 95 },
-    { name: "SQL", percentage: 90 },
+    { name: "Python / PySpark", percentage: 95 },
+    { name: "SQL / PostgreSQL / BigQuery", percentage: 92 },
     { name: "R", percentage: 85 },
-    { name: "JavaScript", percentage: 75 },
-    { name: "PowerShell", percentage: 80 },
+    { name: "JavaScript / TypeScript", percentage: 80 },
+    { name: "Kafka / Spark Streaming", percentage: 85 },
   ];
 
   const toolsSkills = [
-    { name: "Azure DevOps", percentage: 90 },
-    { name: "Docker", percentage: 85 },
-    { name: "Git", percentage: 92 },
-    { name: "Power BI", percentage: 88 },
-    { name: "Azure Data Factory", percentage: 85 },
+    { name: "PyTorch / Scikit-learn", percentage: 90 },
+    { name: "Airflow / Docker / Azure", percentage: 88 },
+    { name: "Neo4j / LangGraph", percentage: 85 },
+    { name: "FastAPI / React", percentage: 85 },
+    { name: "Power BI / Tableau", percentage: 85 },
   ];
 
   return (
@@ -104,11 +92,11 @@ const Home = () => {
               Hi, I'm Raghuveer Venkatesh
             </h1>
             <p className="text-xl md:text-2xl mb-6 text-white font-medium">
-              Data Professional & Software Engineer
+              AI Engineer & Staff Data Scientist
             </p>
             <p className="text-lg mb-8 max-w-md text-white">
-              Specializing in data automation and building scalable software solutions.
-              Currently pursuing a Master's in Applied Data Science at Indiana University.
+              Bridging the gap between robust data engineering platforms and intelligent ML logic.
+              Specializing in scalable ETL, AI Agents, and full-stack MLOps architectures.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90 shadow-card hover:shadow-hover">
@@ -129,20 +117,13 @@ const Home = () => {
             <h2 className="section-title text-left">About Me</h2>
             <div className="prose prose-lg text-black">
               <p className="mb-4">
-                I'm a passionate data professional with a background in software engineering
-                and data automation. With over 6 years of experience in designing and 
-                implementing scalable data pipelines, ETL processes, and software solutions,
-                I specialize in turning complex data challenges into valuable insights.
+                I am an <strong>AI Engineer & Data Scientist</strong> with over 6 years of industry experience across machine learning development and robust data architecture. Finishing my MS in Applied Data Science (3.95 GPA) at Indiana University, my work bridges the gap between deep data engineering platforms and intelligent algorithmic logic.
               </p>
               <p className="mb-4">
-                Currently, I'm pursuing a Master's in Applied Data Science at Indiana 
-                University, Indianapolis, where I'm expanding my expertise in advanced 
-                statistical methods, machine learning, and big data technologies.
+                I specialize in building mission-critical ML pipelines, semantic LLM applications, and robust end-to-end data systems. My technological expertise spans AI Agents, Knowledge Graphs (Neo4j, LangGraph), Applied ML (PyTorch, LightGBM, LSTM), and scalable MLOps architectures.
               </p>
               <p className="mb-6">
-                Previously, I worked as a Senior Software Engineer at Eurofins IT, where I led
-                data automation initiatives and developed solutions that dramatically improved
-                operational efficiency.
+                With a track record as an AI Engineer at The Polis Center, AI Data Engineer Intern at Horizon League, and Senior Data Automation Engineer at Eurofins IT, I am passionate about bringing predictive intelligence to production.
               </p>
             </div>
             <div className="flex space-x-4 text-black hover:text-primary transition-colors">
@@ -212,31 +193,31 @@ const Home = () => {
           <div className="max-w-3xl mx-auto">
             <div className="timeline-item animate-fade-in">
               <div className="timeline-dot"></div>
-              <div className="timeline-date text-black">July 2022 - August 2024</div>
-              <h3 className="timeline-title text-black">Senior Software Engineer – Data Automation</h3>
-              <div className="timeline-organization text-black">Eurofins IT, Bangalore, India</div>
+              <div className="timeline-date text-black">August 2024 - Present</div>
+              <h3 className="timeline-title text-black">AI Engineer & Data Scientist</h3>
+              <div className="timeline-organization text-black">The Polis Center / Independent Projects</div>
               <p className="mb-3 text-black">
-                Led data automation initiatives and managed complex ETL processes across multiple platforms.
+                Architecting intelligent ML platforms and deploying full-stack analytical applications.
               </p>
               <ul className="list-disc pl-5 mb-4 text-black">
-                <li>Designed and implemented data pipelines for 38 Azure tenants</li>
-                <li>Led a team of six engineers in data migration projects</li>
-                <li>Developed PowerApps solutions for internal data tracking</li>
+                <li>Developed the Chicago Crime Safe City Platform with Graph RAG and predictive models</li>
+                <li>Engineered NYC Metropulse, a real-time streaming analytics application using Spark and Kafka</li>
+                <li>Built and deployed multiple AI vision and predictive dashboard applications</li>
               </ul>
             </div>
             
             <div className="timeline-item animate-fade-in" style={{animationDelay: "300ms"}}>
               <div className="timeline-dot"></div>
-              <div className="timeline-date text-black">June 2018 - June 2022</div>
-              <h3 className="timeline-title text-black">Software Engineer</h3>
+              <div className="timeline-date text-black">July 2022 - August 2024</div>
+              <h3 className="timeline-title text-black">Senior Data Automation Engineer</h3>
               <div className="timeline-organization text-black">Eurofins IT, Bangalore, India</div>
               <p className="mb-3 text-black">
-                Developed software solutions and automated processes to improve operational efficiency.
+                Led data automation initiatives and managed complex ETL processes across multiple platforms.
               </p>
               <ul className="list-disc pl-5 mb-4 text-black">
-                <li>Created scheduled jobs using Azure DevOps for log consolidation</li>
-                <li>Developed Eurofins travel request portal to streamline processes</li>
-                <li>Built dynamic email distribution systems for 60k+ users</li>
+                <li>Designed scalable ETL workflows and orchestrated cloud operations using Azure</li>
+                <li>Developed ML systems processing over 300M backend audit events per month</li>
+                <li>Led automation pipeline modernization across the enterprise architecture</li>
               </ul>
             </div>
           </div>
@@ -318,29 +299,6 @@ const Home = () => {
             <p className="text-black font-semibold">Introduction to Data Engineering</p>
             <p className="text-black">Python Project for Data Engineering</p>
             <p className="text-black">Linux Commands and Shell Scripting</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Blog Section */}
-      <section className="bg-secondary py-20">
-        <div className="container mx-auto px-4 md:px-6">
-          <h2 className="section-title text-center mb-12">From the Blog</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post, index) => (
-              <BlogPostCard
-                key={post.slug}
-                {...post}
-                delay={index * 200}
-              />
-            ))}
-          </div>
-          
-          <div className="text-center mt-12">
-            <Button asChild>
-              <Link to="/blog">Read More Articles</Link>
-            </Button>
           </div>
         </div>
       </section>

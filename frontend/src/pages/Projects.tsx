@@ -4,70 +4,100 @@ import ProjectCard from "@/components/ProjectCard";
 
 const Projects = () => {
   // Filter categories
-  const categories = ["All", "Data Engineering", "Machine Learning", "Web Development", "Automation"];
+  const categories = ["All", "AI Agents", "Applied ML", "Data Engineering", "Data Analytics"];
   const [activeFilter, setActiveFilter] = useState("All");
 
   // Sample projects data
   const projects = [
     {
-      title: "Sentiment Analysis Pipeline",
-      description: "Engineered a Python-based sentiment analysis pipeline that scraped Amazon & Peloton reviews using BeautifulSoup and PySpark, ingested data into PostgreSQL, and delivered interactive insights via a Streamlit dashboard.",
+      title: "Chicago Crime Safe City Platform",
+      description: "End-to-end data infra & platform turning 20 years of crime data into predictive risk models & a Graph RAG assistant.",
       image: "/placeholder.svg",
-      imageAlt: "Sentiment Analysis Project",
-      technologies: ["Python", "PySpark", "BeautifulSoup", "PostgreSQL", "Streamlit"],
-      github: "https://github.com/raghuveer9303/Web-Scraper",
-      live: "",
+      imageAlt: "Chicago Crime Dashboard",
+      technologies: ["BigQuery", "Airflow", "Neo4j", "LangGraph", "React"],
+      github: "https://github.com/raghuveer9303",
+      live: "https://chicagocrimeproject.raghuveervenkatesh.us",
+      category: "AI Agents",
+    },
+    {
+      title: "NYC Metropulse GBFS",
+      description: "Real-time predictive analytics platform preventing empty docks and full stations across NYC bikeshare.",
+      image: "/placeholder.svg",
+      imageAlt: "NYC Metropulse GBFS Dashboard",
+      technologies: ["Spark Streaming", "Kafka", "Airflow", "LSTM", "PostGIS"],
+      github: "https://github.com/raghuveer9303",
+      live: "https://citibikeproject.raghuveervenkatesh.us",
       category: "Data Engineering",
     },
     {
-      title: "FIFA Striker Market Value Predictor",
-      description: "Developed a regression model leveraging player performance, physical attributes, and stats to forecast football strikers' market value, empowering smarter scouting and investment decisions.",
+      title: "DentaVision",
+      description: "Real-time AI-based dental condition classification from uploaded oral images using Vision Transformers.",
       image: "/placeholder.svg",
-      imageAlt: "FIFA Striker Value Predictor",
-      technologies: ["R", "Statistics", "Regression", "Data Analysis"],
-      github: "",
+      imageAlt: "DentaVision App",
+      technologies: ["PyTorch", "ViT", "FastAPI", "React"],
+      github: "https://github.com/raghuveer9303",
+      live: "https://dentalvision.onrender.com/",
+      category: "Applied ML",
+    },
+    {
+      title: "TaxiPulse",
+      description: "Geospatial analytics dashboard optimizing profitable routes and time windows for NYC taxi drivers.",
+      image: "/placeholder.svg",
+      imageAlt: "TaxiPulse Dashboard",
+      technologies: ["Dash", "Plotly", "GeoPandas", "Docker"],
+      github: "https://github.com/raghuveer9303",
+      live: "https://taxipulse.onrender.com",
+      category: "Data Analytics",
+    },
+    {
+      title: "Lloyd Banking Churn Prediction",
+      description: "Two-stage ML risk scoring workflow modeling customer behavior, transactions, and demographics.",
+      image: "/placeholder.svg",
+      imageAlt: "Churn Prediction",
+      technologies: ["Python", "Scikit-learn", "Random Forest", "Pandas"],
+      github: "https://github.com/raghuveer9303/LLoyd-Banking-Churn-Project",
+      live: "",
+      category: "Applied ML",
+    },
+    {
+      title: "Striker Worth Analytics",
+      description: "Unified athlete performance data model and dashboards for coaching staff and conference administrators.",
+      image: "/placeholder.svg",
+      imageAlt: "Striker Worth Analytics",
+      technologies: ["SQL", "PowerBI", "Tableau"],
+      github: "https://github.com/raghuveer9303",
+      live: "https://sii-sports-data-solutions-lab.github.io/home/#/projects/striker-worth",
+      category: "Data Analytics",
+    },
+    {
+      title: "Statistical Analysis Reports",
+      description: "Published data analysis and exploratory visualization documents.",
+      image: "/placeholder.svg",
+      imageAlt: "Analysis Reports",
+      technologies: ["R", "Statistical Modeling"],
+      github: "https://github.com/raghuveer9303",
       live: "https://rpubs.com/Raghuveer_Venkatesh/1255695",
-      category: "Machine Learning",
+      category: "Data Analytics",
     },
     {
-      title: "Travel Request Portal",
-      description: "Developed Eurofins travel request portal which simplified filling, approval and tracking of travel request form. The system reduced travel request processing time from 10 days to 3 days.",
+      title: "ADA Accessibility AI Pipeline",
+      description: "Fine-tuned GPT-4o pipeline automating WCAG accessibility remediation across 1,400+ documents.",
       image: "/placeholder.svg",
-      imageAlt: "Travel Request Portal",
-      technologies: ["C#", "SharePoint", "PowerBI", "SQL"],
+      imageAlt: "ADA AI Pipeline",
+      technologies: ["GPT-4o", "Pydantic", "Python", "FastAPI"],
       github: "",
       live: "",
-      category: "Web Development",
+      category: "AI Agents",
     },
     {
-      title: "Azure ETL Pipeline",
-      description: "Designed and implemented a scalable data pipeline to collect, transform, and load tenant data from 38 Azure tenants into a centralized repository, enabling efficient integration and compliance reporting.",
+      title: "Insider Threat ML System",
+      description: "Scalable nightly batch anomaly detection pipeline processing ~300M backend audit events/month.",
       image: "/placeholder.svg",
-      imageAlt: "Azure ETL Pipeline",
-      technologies: ["Python", "Azure Data Factory", "Power BI", "SQL"],
+      imageAlt: "Insider Threat ML",
+      technologies: ["Azure Data Factory", "PySpark", "Isolation Forest"],
       github: "",
       live: "",
       category: "Data Engineering",
-    },
-    {
-      title: "Email Distribution System",
-      description: "Made dynamic email distribution lists (1600 entries) easily accessible to 60k+ users by creating a webapp and automated loading the data using C# into a SharePoint List.",
-      image: "/placeholder.svg",
-      imageAlt: "Email Distribution System",
-      technologies: ["C#", "SharePoint", "Azure DevOps", "Automation"],
-      github: "",
-      live: "",
-      category: "Automation",
-    },
-    {
-      title: "Log Consolidation System",
-      description: "Created and deployed scheduled jobs using Azure DevOps to consolidate application logs for a distributed application (hosted in 18 servers across 3 environments) into a unified database.",
-      image: "/placeholder.svg",
-      imageAlt: "Log Consolidation System",
-      technologies: ["Azure DevOps", "PowerShell", "SQL", "C#"],
-      github: "",
-      live: "",
-      category: "Automation",
     },
   ];
 
@@ -78,9 +108,9 @@ const Projects = () => {
 
   return (
     <div className="container mx-auto px-4 py-16 md:py-24">
-      <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">Projects</h1>
+      <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">Portfolio Projects</h1>
       <p className="text-lg text-black text-center mb-12 max-w-2xl mx-auto">
-        A collection of my work across data automation, software engineering, and machine learning.
+        A collection of my mission-critical work across Applied ML, AI Agents, and robust Data Engineering pipelines.
       </p>
 
       {/* Filter buttons */}
