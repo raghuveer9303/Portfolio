@@ -92,13 +92,13 @@ const ChatBox = () => {
                   "max-w-[80%] p-2 rounded-lg text-sm",
                   message.isUser
                     ? "ml-auto bg-primary text-white rounded-br-none"
-                    : "bg-muted/10 text-black rounded-bl-none"
+                    : "bg-muted text-foreground rounded-bl-none"
                 )}>
                 {message.text}
               </div>
             ))}
             {messages.length === 0 && (
-              <div className="text-center text-black text-sm">
+              <div className="text-center text-muted-foreground text-sm">
                 Hi There! Raghuveer here. How can I help you?
               </div>
             )}
@@ -113,7 +113,7 @@ const ChatBox = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Type your message..."
-                className="flex-1 px-2 py-1.5 text-sm rounded-md bg-background border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-black placeholder:text-black/60"
+                className="flex-1 px-2 py-1.5 text-sm rounded-md bg-background border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-foreground placeholder:text-muted-foreground"
               />
               <Button 
                 type="submit" 

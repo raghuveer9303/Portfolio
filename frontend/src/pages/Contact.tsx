@@ -4,7 +4,7 @@ const Contact = () => {
   return (
     <div className="container mx-auto px-4 py-16 md:py-24">
       <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">Get in Touch</h1>
-      <p className="text-lg text-black text-center mb-12 max-w-2xl mx-auto">
+      <p className="text-lg text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
         Have a question or want to discuss a potential project? I'd love to hear from you.
       </p>
 
@@ -12,11 +12,11 @@ const Contact = () => {
         <div>
           <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
           <div className="space-y-4">
-            <p className="flex items-center text-black">
+            <p className="flex items-center text-foreground">
               <Mail className="mr-2 h-5 w-5" />
               raghuveervenkatesh7@gmail.com
             </p>
-            <p className="flex items-center text-black">
+            <p className="flex items-center text-foreground">
               <MapPin className="mr-2 h-5 w-5" />
               Indianapolis, Indiana
             </p>
@@ -30,7 +30,7 @@ const Contact = () => {
               href="https://github.com/raghuveer9303"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-black hover:text-primary transition-colors hover:-translate-y-1 transform duration-200"
+              className="text-foreground hover:text-primary transition-colors hover:-translate-y-1 transform duration-200"
               aria-label="GitHub"
             >
               <Github size={28} />
@@ -39,7 +39,7 @@ const Contact = () => {
               href="https://www.linkedin.com/in/raghuveer-venkatesh"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-black hover:text-primary transition-colors hover:-translate-y-1 transform duration-200"
+              className="text-foreground hover:text-primary transition-colors hover:-translate-y-1 transform duration-200"
               aria-label="LinkedIn"
             >
               <Linkedin size={28} />
@@ -49,10 +49,10 @@ const Contact = () => {
 
         <div>
           <h2 className="text-2xl font-bold mb-6">Office Hours</h2>
-          <p className="text-black">
+          <p className="text-foreground">
             Monday - Friday: 9:00 AM - 5:00 PM EST
           </p>
-          <p className="text-black mt-2">
+          <p className="text-muted-foreground mt-2">
             I typically respond to messages within 24 hours.
           </p>
         </div>

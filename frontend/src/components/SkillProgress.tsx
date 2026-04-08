@@ -28,7 +28,7 @@ const SkillProgress = ({
     <div className="mb-6">
       <div className="flex justify-between mb-2">
         <span className="text-foreground font-medium">{name}</span>
-        <span className="text-muted tabular-nums">{progress}%</span>
+        <span className="text-muted-foreground tabular-nums">{progress}%</span>
       </div>
       <div className="h-2.5 bg-muted/20 rounded-full overflow-hidden">
         <div
