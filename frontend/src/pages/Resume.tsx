@@ -11,10 +11,10 @@ const Resume = () => {
           <div>
             <h1 className="text-4xl md:text-5xl font-bold mb-2">Resume</h1>
             <p className="text-xl text-black">
-              My professional background and qualifications
+              Comprehensive overview of my professional experience, skills, and qualifications.
             </p>
           </div>
-          <Button asChild className="mt-4 md:mt-0" size="lg">
+          <Button asChild className="mt-4 md:mt-0 shadow-sm hover:shadow-md" size="lg">
             <a href={RESUME_URL} target="_blank" rel="noopener noreferrer">
               <Download className="mr-2 h-5 w-5" />
               Download PDF
@@ -25,33 +25,35 @@ const Resume = () => {
         <div className="bg-card rounded-lg shadow-sm p-8 md:p-10 mb-10 animate-fade-in">
           <div className="mb-8">
             <h2 className="text-3xl font-bold mb-2">Raghuveer Venkatesh</h2>
-            <p className="text-lg mb-4">Data Professional & Software Engineer</p>
+            <p className="text-lg mb-4 text-data-blue font-semibold">AI Engineer, ML Engineer & Data Scientist</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-black">
               <div>
-                <p>Indianapolis, Indiana</p>
-                <p>(317)-417-8807</p>
+                <p>Location: Indianapolis, IN</p>
+                <a 
+                  href="mailto:raghuveervenkatesh7@gmail.com" 
+                  className="hover:text-data-blue"
+                >
+                  raghuveervenkatesh7@gmail.com
+                </a>
               </div>
-              <div>
-                <p>raghuveervenkatesh7@gmail.com</p>
-                <div className="flex space-x-4">
-                  <a 
-                    href="https://www.linkedin.com/in/raghuveer-venkatesh"
-                    className="text-data-blue hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    LinkedIn
-                  </a>
-                  <a 
-                    href="https://github.com/raghuveer9303"
-                    className="text-data-blue hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    GitHub
-                  </a>
-                </div>
+              <div className="flex space-x-4">
+                <a 
+                  href="https://www.linkedin.com/in/raghuveervenkatesh"
+                  className="text-data-blue hover:underline font-medium"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn
+                </a>
+                <a 
+                  href="https://github.com/raghuveer9303"
+                  className="text-data-blue hover:underline font-medium"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
               </div>
             </div>
           </div>
@@ -60,41 +62,70 @@ const Resume = () => {
             <h2 className="text-2xl font-bold mb-6">Education</h2>
             
             <div className="mb-6">
-              <h3 className="text-xl font-bold">Indiana University Indianapolis, U.S</h3>
-              <p className="text-data-blue">Master of Science, Applied Data Science</p>
-              <p className="text-black mb-2">Expected Dec 2025 - GPA 4.00/4.00</p>
-              <p><span className="font-medium">Relevant Coursework:</span> Python programming, Statistics in R, Database Design</p>
+              <h3 className="text-xl font-bold">Indiana University, Indianapolis, US</h3>
+              <p className="text-data-blue font-semibold">Master of Science (MS) in Applied Data Science</p>
+              <div className="flex justify-between items-center text-black mb-2">
+                <p>Expected Completion: January 2026</p>
+                <p className="font-semibold">GPA: 3.95 (3.97/4.00)</p>
+              </div>
+              <p className="text-black"><span className="font-semibold text-black">Focus:</span> Applied ML, NLP, Statistics in R, Big Data Engineering, Database Design.</p>
+              <p className="text-black"><span className="font-semibold text-black">Activities:</span> Computer Science Club</p>
             </div>
             
             <div>
-              <h3 className="text-xl font-bold">CMR Institute of Technology Bangalore, India</h3>
-              <p className="text-data-blue">Bachelor of Engineering, Electronics and Computer Engineering</p>
-              <p className="text-black">Graduated Jan 2018</p>
+              <h3 className="text-xl font-bold">CMR Institute of Technology, Bangalore, India</h3>
+              <p className="text-data-blue font-semibold">Bachelor of Engineering (B.E.), Electronics and Communication Engineering</p>
+              <div className="flex justify-between items-center text-black mb-2">
+                <p>Graduated: January 2018</p>
+                <p className="font-semibold">GPA: 3.5</p>
+              </div>
+              <p className="text-black"><span className="font-semibold text-black">Activities:</span> Conducted Workshops, Entrepreneurship & Leadership Programs, Tech Mentor, Chemistry TA.</p>
             </div>
           </div>
 
           <div className="border-t border-border pt-8 mb-8">
-            <h2 className="text-2xl font-bold mb-6">Skills</h2>
+            <h2 className="text-2xl font-bold mb-6">Technical Skills</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div>
-                <h3 className="font-bold mb-2">Programming Languages</h3>
-                <p className="text-black">
-                  Python, SQL, R, PowerShell, HTML, CSS, JavaScript, C#
+                <h3 className="font-bold mb-2">Machine Learning & Modelling</h3>
+                <p className="text-black text-sm">
+                  Scikit-learn, Random Forest, Regression, ARIMA, XGBoost, LightGBM, Gradient Boosting
                 </p>
               </div>
               
               <div>
-                <h3 className="font-bold mb-2">Tools & Platforms</h3>
-                <p className="text-black">
-                  Azure DevOps, Docker, Git, Visual Studio, Power BI, PowerApps, SharePoint, Azure Data Factory, Linux
+                <h3 className="font-bold mb-2">Deep Learning & NLP</h3>
+                <p className="text-black text-sm">
+                  BERT (fine-tuning), LDA, CNN, EfficientNet, ViT (Vision Transformer), spaCy, Hugging Face, PyTorch
                 </p>
               </div>
               
               <div>
-                <h3 className="font-bold mb-2">Core Competencies</h3>
-                <p className="text-black">
-                  ETL, Automation, Database Management, Azure Cloud Services, Web Development, Parallel Programming, IT Project Management, Data Visualization, REST APIs, Pandas, PySpark
+                <h3 className="font-bold mb-2">AI Agents, LLM & RAG</h3>
+                <p className="text-black text-sm">
+                  LangGraph, Langfuse, Qdrant, GPT-4o, Neo4j, Prompt Engineering
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-bold mb-2">MLOps & Serving</h3>
+                <p className="text-black text-sm">
+                  Apache Airflow, FastAPI, Champion-Challenger, PSI/KS Drift Detection, Docker, MLflow
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-bold mb-2">Data Engineering & Cloud</h3>
+                <p className="text-black text-sm">
+                  SQL, PySpark, Kafka, R, Azure (ADF, Blob, DevOps), PostgreSQL (PostGIS), GCP (BigQuery, CloudRun, Pub/Sub)
+                </p>
+              </div>
+
+              <div>
+                <h3 className="font-bold mb-2">Visualization Platforms</h3>
+                <p className="text-black text-sm">
+                  PowerBI, Tableau, Streamlit, Plotly, Dash, Seaborn, Folium, React
                 </p>
               </div>
             </div>
@@ -104,98 +135,119 @@ const Resume = () => {
             <h2 className="text-2xl font-bold mb-6">Professional Experience</h2>
             
             <div className="mb-8">
-              <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
-                <h3 className="text-xl font-bold">Senior Software Engineer – Data Automation</h3>
-                <p className="text-black">July 2022 – August 2024</p>
+              <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-1">
+                <h3 className="text-xl font-bold">1. AI Engineer</h3>
+                <p className="text-black font-semibold text-sm">Sep 2025 – Dec 2025</p>
               </div>
-              <p className="text-data-blue mb-4">Eurofins IT, Bangalore, India</p>
-              
-              <ul className="list-disc pl-5 space-y-2 text-black">
-                <li>Designed and implemented a scalable data pipeline to collect, transform, and load (ETL) tenant data from 38 Azure tenants into a centralized repository, enabling efficient integration, processing, and compliance reporting using Python, Azure Data Factory, and Power BI.</li>
-                <li>Led a team of six engineers in a data migration project as a Scrum Master, coordinating across multiple countries to migrate SharePoint data, while implementing best practices for data validation, monitoring, and reporting, delivering the project ahead of schedule.</li>
-                <li>Developed a PowerApps-based app integrated with SQL Stored Procedures for internal data tracking, which automated data entry across 146 office locations, reducing manual input and improving data consistency.</li>
-                <li>Created a data pipeline to automate the migration of 6TB of unstructured data, including documents and SharePoint list items, from multiple on-premises SharePoint servers to Azure Blob Storage and SharePoint Online, ensuring seamless data flow and scalability.</li>
-                <li>Built data ingestion and processing pipelines for Microsoft 365 (M365) activity logs, which decreased audit time by 70% by automating data validation, transformation, and loading processes, ensuring timely and accurate reporting for improved data governance.</li>
+              <p className="text-data-blue mb-3 font-semibold">The Polis Center (Indianapolis, IN - Remote)</p>
+              <ul className="list-disc pl-5 space-y-1 text-black text-sm">
+                <li>Leveraged Hugging Face products, Transformers, and core AI engineering concepts to optimize workflows.</li>
               </ul>
             </div>
-            
-            <div>
-              <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
-                <h3 className="text-xl font-bold">Software Engineer</h3>
-                <p className="text-black">June 2018 – June 2022</p>
-              </div>
-              <p className="text-data-blue mb-4">Eurofins IT, Bangalore, India</p>
-              
-              <ul className="list-disc pl-5 space-y-2 text-black">
-                <li>Created and deployed scheduled jobs using Azure DevOps to consolidate application logs for a distributed application (hosted in 18 servers across 3 environments) into a unified database so that it could be further processed by "Eurofins Data" team.</li>
-                <li>Developed Eurofins travel request portal which simplified filling, approval and tracking of travel request form. The system reduced travel request processing time from 10 days to 3 days, while providing real-time access to historical data using PowerBI for reporting and cost analysis.</li>
-                <li>Made dynamic email distribution lists (1600 entries) easily accessible to 60k+ users by creating a webapp and automated loading the data using C# into a SharePoint List.</li>
-              </ul>
-            </div>
-          </div>
 
-          <div className="border-t border-border pt-8 mb-8">
-            <h2 className="text-2xl font-bold mb-6">Projects</h2>
+            <div className="mb-8">
+              <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-1">
+                <h3 className="text-xl font-bold">2. AI Data Engineer Intern</h3>
+                <p className="text-black font-semibold text-sm">May 2025 – Dec 2025</p>
+              </div>
+              <p className="text-data-blue mb-3 font-semibold">Horizon League (Indianapolis, IN - Hybrid)</p>
+              <ul className="list-disc pl-5 space-y-1 text-black text-sm">
+                <li>Built an end-to-end Deal Analytics application integrating data pipelines, dashboards, and automated insights.</li>
+                <li>Developed semantic sentence segmentation using LLMs, enhancing natural language understanding.</li>
+                <li>Replaced 3-4 days of manual spreadsheet work per reporting cycle with unified SQL models and near-real-time Power BI/Tableau dashboards.</li>
+              </ul>
+            </div>
+
+            <div className="mb-8">
+              <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-1">
+                <h3 className="text-xl font-bold">3. Lead AI Engineer</h3>
+                <p className="text-black font-semibold text-sm">Aug 2024 – Dec 2025</p>
+              </div>
+              <p className="text-data-blue mb-3 font-semibold">COMET LAB IU (Indianapolis, IN)</p>
+              <ul className="list-disc pl-5 space-y-1 text-black text-sm">
+                <li>Engineered and deployed a GPT-4o-powered accessibility pipeline with Pydantic validation.</li>
+                <li>Reduced manual WCAG remediation time by 93% (45m to &lt;3m) across 1,400+ documents and 6 institutional departments.</li>
+              </ul>
+            </div>
+
+            <div className="mb-8">
+              <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-1">
+                <h3 className="text-xl font-bold">4. Research Assistant</h3>
+                <p className="text-black font-semibold text-sm">Sep 2024 – May 2025</p>
+              </div>
+              <p className="text-data-blue mb-3 font-semibold">IU Indianapolis Sports Innovation Institute</p>
+              <ul className="list-disc pl-5 space-y-1 text-black text-sm">
+                <li>Built a Review Scraper to automate data collection, improving research efficiency by 70%.</li>
+                <li>Designed and maintained the institute website for accessibility and stakeholder engagement.</li>
+                <li>Collaborated with faculty on sports analytics research.</li>
+              </ul>
+            </div>
             
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-xl font-bold mb-2">Sentiment Analysis Pipeline</h3>
-                <p className="text-black mb-1">
-                  Engineered a Python-based sentiment analysis pipeline that scraped Amazon & Peloton reviews using BeautifulSoup and PySpark, ingested data into PostgreSQL, and delivered interactive insights via a Streamlit dashboard.
-                </p>
-                <p>
-                  <a 
-                    href="https://github.com/raghuveer9303/Web-Scraper" 
-                    className="text-data-blue hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Github: https://github.com/raghuveer9303/Web-Scraper
-                  </a>
-                </p>
+            <div className="mb-8">
+              <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-1">
+                <h3 className="text-xl font-bold">5. Senior Software Engineer - Data Automation</h3>
+                <p className="text-black font-semibold text-sm">Jul 2020 – Aug 2024</p>
               </div>
-              
-              <div>
-                <h3 className="text-xl font-bold mb-2">FIFA Striker Market Value Predictor</h3>
-                <p className="text-black mb-1">
-                  Developed a regression model leveraging player performance, physical attributes, and stats to forecast football strikers' market value, empowering smarter scouting and investment decisions.
-                </p>
-                <p>
-                  <a 
-                    href="https://rpubs.com/Raghuveer_Venkatesh/1255695" 
-                    className="text-data-blue hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Link: https://rpubs.com/Raghuveer_Venkatesh/1255695
-                  </a>
-                </p>
+              <p className="text-data-blue mb-3 font-semibold">Eurofins IT (Bengaluru, India) — Total Tenure: 6.25 years</p>
+              <ul className="list-disc pl-5 space-y-1 text-black text-sm">
+                <li><strong>Data Engineering:</strong> Automated M365 activity log processing, reducing audit times by 70%.</li>
+                <li><strong>Insider Threat ML System:</strong> Designed a scalable nightly batch anomaly detection pipeline processing ~300M events/month. Used Azure Data Factory, SQL, and Isolation Forest/Z-Score scoring. Replaced manual routing and saved ~14 FTE hours/week.</li>
+                <li><strong>Forecasting:</strong> Architected a hybrid SARIMA-XGBoost pipeline for 18-server SharePoint farms achieving 4.8% MAPE.</li>
+                <li><strong>Scrum Master / Leadership:</strong> Managed cross-functional teams, overseeing multi-country SharePoint migrations (migrating 6TB of documents to Azure).</li>
+                <li><strong>PowerApps:</strong> Built a Lunch Booking App with SQL integrating 146 office locations.</li>
+              </ul>
+            </div>
+
+            <div className="mb-8">
+              <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-1">
+                <h3 className="text-xl font-bold">6. Software Engineer</h3>
+                <p className="text-black font-semibold text-sm">Jun 2018 – Jun 2020</p>
               </div>
+              <p className="text-data-blue mb-3 font-semibold">Eurofins IT (Bengaluru, India)</p>
+              <ul className="list-disc pl-5 space-y-1 text-black text-sm">
+                <li>Automated user support request solutions, reducing volume by 32%.</li>
+                <li>Built a travel request portal and automated Azure DevOps CI/CD pipelines.</li>
+              </ul>
+            </div>
+
+            <div>
+              <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-1">
+                <h3 className="text-xl font-bold">7. Intern Student</h3>
+                <p className="text-black font-semibold text-sm">Dec 2017 – Jun 2018</p>
+              </div>
+              <p className="text-data-blue mb-3 font-semibold">edWisor.com (Bengaluru, India)</p>
+              <ul className="list-disc pl-5 space-y-1 text-black text-sm">
+                <li>Focused on frontend stack (HTML5, CSS3, AngularJS, jQuery) and GIT version control.</li>
+              </ul>
             </div>
           </div>
 
           <div className="border-t border-border pt-8 mb-8">
             <h2 className="text-2xl font-bold mb-6">Certifications</h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-black text-sm">
+              <ul className="list-disc pl-5 space-y-2">
+                <li><strong>Neo4j:</strong> Graph Data Science Certification (Mar 2026)</li>
+                <li><strong>Hugging Face:</strong> AI Agents Fundamentals (Mar 2026)</li>
+                <li><strong>Forage:</strong> Lloyds Banking Group Data Science Virtual Internship (Mar 2026)</li>
+                <li><strong>Scrum Alliance:</strong> Certified ScrumMaster® (CSM®) (Aug 2022)</li>
+                <li><strong>Microsoft:</strong> Certified Azure Fundamentals (AZ-900) (Aug 2021)</li>
+                <li><strong>LinkedIn:</strong> Complete Guide to SQL for Data Engineering (Sep 2024)</li>
+                <li><strong>Kaggle:</strong> Intro to Programming / Python (Dec 2023)</li>
+                <li><strong>Great Learning:</strong> MySQL Basics (Dec 2023)</li>
+              </ul>
+              
               <div>
-                <p className="font-medium">Microsoft - AZ900 - Azure Fundamentals</p>
-              </div>
-              <div>
-                <p className="font-medium">Scrum Alliance - Certified ScrumMaster CSM®</p>
-              </div>
-              <div>
-                <p className="font-medium">Kaggle – Python certificate, Pandas certificate</p>
-              </div>
-              <div>
-                <p className="font-medium">Hacker Rank - Python 4* Badge, SQL 2* Badge</p>
-              </div>
-              <div className="md:col-span-2">
-                <p className="font-medium">IBM Certified Data Engineer Professional Certs</p>
-                <ul className="list-disc pl-5 text-black">
-                  <li>Introduction to Data Engineering</li>
-                  <li>Python Project for Data Engineering</li>
-                  <li>Linux Commands and Shell Scripting</li>
+                <p className="font-bold mb-2">IBM Certifications:</p>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>Data Engineering Foundations Specialization (Oct 2025)</li>
+                  <li>ETL and Data Pipelines with Shell, Airflow and Kafka (Oct 2024)</li>
+                  <li>Hands-on Introduction to Linux Commands and Shell Scripting (May 2024)</li>
+                  <li>Databases and SQL for Data Science with Python (May 2024)</li>
+                  <li>Intro to Relational Databases (RDBMS) (Apr 2024)</li>
+                  <li>Python Project for Data Engineering (Mar 2024)</li>
+                  <li>Python for Data Science, AI & Development (Jan 2024)</li>
+                  <li>Introduction to Data Engineering (Jan 2024)</li>
                 </ul>
               </div>
             </div>
@@ -204,8 +256,8 @@ const Resume = () => {
           <div className="border-t border-border pt-8">
             <h2 className="text-2xl font-bold mb-6">Awards</h2>
             
-            <p className="text-black">
-              Eurofins Star Performer Award – Q3-2019, Q3-2021, Q1-2023 for streamlining operations and completing critical projects.
+            <p className="text-black text-sm lg:text-base">
+              <strong>Eurofins Star Performer Award</strong> – Q3-2019, Q3-2021, and Q1-2023. Awarded for streamlining operations, delivering high-impact data solutions, and completing critical automated workflows under deadline.
             </p>
           </div>
         </div>
