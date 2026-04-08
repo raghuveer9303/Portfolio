@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Download, ExternalLink, Github, Linkedin, Mail } from "lucide-react";
+import { Download, ExternalLink, Github, Linkedin, Mail, Activity, BrainCircuit, TerminalSquare, Database, CheckCircle, Shield } from "lucide-react";
 import SkillProgress from "@/components/SkillProgress";
 import ProjectCard from "@/components/ProjectCard";
 
@@ -13,7 +13,7 @@ const Home = () => {
     {
       title: "Chicago Crime Safe City Platform",
       description: "A 20-year crime dataset transformed into predictive risk models. Includes an analytical data warehouse, ML spatial risk engines, and a Graph RAG Copilot resolving Cypher queries natively.",
-      image: "/placeholder.svg",
+      image: "/projects/chicago_crime_ui.png",
       imageAlt: "Chicago Crime Dashboard",
       technologies: ["BigQuery", "Airflow", "PySpark", "Neo4j", "LangGraph", "React"],
       github: "https://github.com/raghuveer9303/Chicago-Crime-Safe-City",
@@ -22,7 +22,7 @@ const Home = () => {
     {
       title: "NYC Metropulse GBFS",
       description: "Real-time predictive analytics platform preventing empty docks and full stations across NYC. Ingests live GBFS endpoints and batch trains deep learning LSTMs.",
-      image: "/placeholder.svg",
+      image: "/projects/nyc_metropulse_ui.png",
       imageAlt: "NYC Metropulse GBFS Dashboard",
       technologies: ["React", "FastAPI", "Spark Streaming", "Kafka", "Airflow", "LSTM"],
       github: "https://github.com/raghuveer9303/nyc-metropulse",
@@ -31,7 +31,7 @@ const Home = () => {
     {
       title: "DentaVision",
       description: "Overcame standard CNN accuracy by 8.1% (reaching 92.4%). Real-time AI-based dental condition classification utilizing heavy deterministic preprocessing and optimized local model loading.",
-      image: "/placeholder.svg",
+      image: "/projects/dentavision_ui.png",
       imageAlt: "DentaVision App",
       technologies: ["PyTorch", "ViT (Vision Transformer)", "FastAPI", "React", "Docker"],
       github: "https://github.com/raghuveer9303/DentaVision",
@@ -40,7 +40,7 @@ const Home = () => {
     {
       title: "ADA Accessibility AI Tool",
       description: "Reduced manual WCAG remediation time by 93% across 1,400+ documents and 6 institutional departments using semantic processing.",
-      image: "/placeholder.svg",
+      image: "/projects/ada_ai_ui.png",
       imageAlt: "ADA AI Pipeline",
       technologies: ["GPT-4o", "Pydantic", "Python"],
       github: "",
@@ -144,28 +144,28 @@ const Home = () => {
           <div className="animate-slide-in-bottom">
             <h3 className="text-2xl font-bold mb-6 text-black">The Arsenal</h3>
             
-            <h4 className="font-bold mb-3 text-black">Machine Learning</h4>
+            <h4 className="font-bold mb-3 text-black flex items-center"><Activity className="w-5 h-5 mr-2 text-primary" /> Machine Learning</h4>
             <div className="mb-6">
               {machineLearningSkills.map((skill, index) => (
                 <SkillProgress key={skill.name} name={skill.name} percentage={skill.percentage} delay={index * 100} />
               ))}
             </div>
 
-            <h4 className="font-bold mb-3 text-black">Deep Learning & NLP</h4>
+            <h4 className="font-bold mb-3 text-black flex items-center"><BrainCircuit className="w-5 h-5 mr-2 text-data-accent" /> Deep Learning & NLP</h4>
             <div className="mb-6">
               {dpAndNlpSkills.map((skill, index) => (
                 <SkillProgress key={skill.name} name={skill.name} percentage={skill.percentage} color="data-accent" delay={index * 100} />
               ))}
             </div>
 
-            <h4 className="font-bold mb-3 text-black">AI Agents, LLMs & Graph AI</h4>
+            <h4 className="font-bold mb-3 text-black flex items-center"><TerminalSquare className="w-5 h-5 mr-2 text-primary" /> AI Agents, LLMs & Graph AI</h4>
             <div className="mb-6">
               {aiAgentsSkills.map((skill, index) => (
                 <SkillProgress key={skill.name} name={skill.name} percentage={skill.percentage} delay={index * 100} />
               ))}
             </div>
 
-            <h4 className="font-bold mb-3 text-black">MLOps & Data Engineering</h4>
+            <h4 className="font-bold mb-3 text-black flex items-center"><Database className="w-5 h-5 mr-2 text-data-accent" /> MLOps & Data Engineering</h4>
             <div>
               {mlopsAndDataEngSkills.map((skill, index) => (
                 <SkillProgress key={skill.name} name={skill.name} percentage={skill.percentage} color="data-accent" delay={index * 100} />
@@ -269,17 +269,20 @@ const Home = () => {
         <h2 className="section-title text-center mb-12">Certifications Spotlight</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in">
+          <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in text-center flex flex-col items-center">
+            <CheckCircle className="w-10 h-10 text-primary mb-4" />
             <h3 className="text-lg font-bold mb-2">Graph Data Science Certification</h3>
             <p className="text-black font-semibold">Neo4j (Mar 2026)</p>
           </div>
           
-          <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in" style={{animationDelay: "200ms"}}>
+          <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in text-center flex flex-col items-center" style={{animationDelay: "200ms"}}>
+            <CheckCircle className="w-10 h-10 text-data-accent mb-4" />
             <h3 className="text-lg font-bold mb-2">AI Agents Fundamentals</h3>
             <p className="text-black font-semibold">Hugging Face (Mar 2026)</p>
           </div>
           
-          <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in" style={{animationDelay: "400ms"}}>
+          <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in text-center flex flex-col items-center" style={{animationDelay: "400ms"}}>
+            <CheckCircle className="w-10 h-10 text-primary mb-4" />
             <h3 className="text-lg font-bold mb-2">Data Engineering Foundations</h3>
             <p className="text-black font-semibold">IBM Specialization</p>
           </div>
