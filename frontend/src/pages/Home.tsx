@@ -75,7 +75,7 @@ const Home = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-primary to-secondary py-20 md:py-32 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-[#050D1A] via-[#0A1628] to-[#050D1A] py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         
         <div className="absolute right-0 top-0 h-full w-full lg:w-1/2 overflow-hidden hidden sm:block flex items-center justify-center">
@@ -118,54 +118,54 @@ const Home = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="animate-fade-in space-y-6">
             <h2 className="section-title text-left">The Philosophy</h2>
-            <div className="prose prose-lg text-black">
+            <div className="prose prose-lg text-muted-foreground">
               <p className="mb-4">
-                In modern AI, models are only as good as the data pipelines supporting them. My journey didn't start with algorithms—it started in the engine room. For years, as a Senior Data Automation Engineer processing <strong>over 300 million backend events per month</strong>, I learned the importance of stability, scaling, and robust architecture.
+                In modern AI, models are only as good as the data pipelines supporting them. My journey didn't start with algorithms—it started in the engine room. For years, as a Senior Data Automation Engineer processing <strong className="text-foreground">over 300 million backend events per month</strong>, I learned the importance of stability, scaling, and robust architecture.
               </p>
               <p className="mb-4">
-                Today, as an <strong>AI Engineer & Data Scientist</strong>, I use that foundation to build more than just standard machine learning models. I architect mission-critical end-to-end systems. Whether it's processing real-time telemetry into a predictive LSTM, integrating Graph RAG to resolve complex queries instantly, or optimizing vision transformers to avoid latency—my focus is on actual production impact.
+                Today, as an <strong className="text-foreground">AI Engineer & Data Scientist</strong>, I use that foundation to build more than just standard machine learning models. I architect mission-critical end-to-end systems. Whether it's processing real-time telemetry into a predictive LSTM, integrating Graph RAG to resolve complex queries instantly, or optimizing vision transformers to avoid latency—my focus is on actual production impact.
               </p>
               <p className="mb-6">
                 From reducing manual WCAG remediation time by 93% for universities to automating anomaly detection for insider threats, my passion is creating full-stack AI logic powered by unshakeable data infrastructure.
               </p>
             </div>
-            <div className="flex space-x-4 text-black hover:text-primary transition-colors">
-              <a href="https://github.com/raghuveer9303" target="_blank" rel="noopener noreferrer" className="text-data-gray hover:text-data-blue transition-colors" aria-label="GitHub">
-                <Github size={24} />
+            <div className="flex space-x-5">
+              <a href="https://github.com/raghuveer9303" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="GitHub">
+                <Github size={22} />
               </a>
-              <a href="https://www.linkedin.com/in/raghuveer-venkatesh" target="_blank" rel="noopener noreferrer" className="text-data-gray hover:text-data-blue transition-colors" aria-label="LinkedIn">
-                <Linkedin size={24} />
+              <a href="https://www.linkedin.com/in/raghuveer-venkatesh" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="LinkedIn">
+                <Linkedin size={22} />
               </a>
-              <a href="mailto:raghuveervenkatesh7@gmail.com" className="text-data-gray hover:text-data-blue transition-colors" aria-label="Email">
-                <Mail size={24} />
+              <a href="mailto:raghuveervenkatesh7@gmail.com" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Email">
+                <Mail size={22} />
               </a>
             </div>
           </div>
           <div className="animate-slide-in-bottom">
-            <h3 className="text-2xl font-bold mb-6 text-black">The Arsenal</h3>
+            <h3 className="text-2xl font-bold mb-6 text-foreground">The Arsenal</h3>
             
-            <h4 className="font-bold mb-3 text-black flex items-center"><Activity className="w-5 h-5 mr-2 text-primary" /> Machine Learning</h4>
+            <h4 className="font-bold mb-3 text-foreground flex items-center"><Activity className="w-5 h-5 mr-2 text-primary" /> Machine Learning</h4>
             <div className="mb-6">
               {machineLearningSkills.map((skill, index) => (
                 <SkillProgress key={skill.name} name={skill.name} percentage={skill.percentage} delay={index * 100} />
               ))}
             </div>
 
-            <h4 className="font-bold mb-3 text-black flex items-center"><BrainCircuit className="w-5 h-5 mr-2 text-data-accent" /> Deep Learning & NLP</h4>
+            <h4 className="font-bold mb-3 text-foreground flex items-center"><BrainCircuit className="w-5 h-5 mr-2 text-accent" /> Deep Learning & NLP</h4>
             <div className="mb-6">
               {dpAndNlpSkills.map((skill, index) => (
                 <SkillProgress key={skill.name} name={skill.name} percentage={skill.percentage} color="data-accent" delay={index * 100} />
               ))}
             </div>
 
-            <h4 className="font-bold mb-3 text-black flex items-center"><TerminalSquare className="w-5 h-5 mr-2 text-primary" /> AI Agents, LLMs & Graph AI</h4>
+            <h4 className="font-bold mb-3 text-foreground flex items-center"><TerminalSquare className="w-5 h-5 mr-2 text-primary" /> AI Agents, LLMs & Graph AI</h4>
             <div className="mb-6">
               {aiAgentsSkills.map((skill, index) => (
                 <SkillProgress key={skill.name} name={skill.name} percentage={skill.percentage} delay={index * 100} />
               ))}
             </div>
 
-            <h4 className="font-bold mb-3 text-black flex items-center"><Database className="w-5 h-5 mr-2 text-data-accent" /> MLOps & Data Engineering</h4>
+            <h4 className="font-bold mb-3 text-foreground flex items-center"><Database className="w-5 h-5 mr-2 text-accent" /> MLOps & Data Engineering</h4>
             <div>
               {mlopsAndDataEngSkills.map((skill, index) => (
                 <SkillProgress key={skill.name} name={skill.name} percentage={skill.percentage} color="data-accent" delay={index * 100} />
@@ -176,7 +176,7 @@ const Home = () => {
       </section>
 
       {/* Proof Section */}
-      <section className="section-container bg-secondary" id="projects">
+      <section className="section-container bg-secondary/40" id="projects">
         <h2 className="section-title text-center mb-12">The Proof (Key Impact)</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -205,23 +205,23 @@ const Home = () => {
           <div className="max-w-3xl mx-auto">
             <div className="timeline-item animate-fade-in">
               <div className="timeline-dot"></div>
-              <div className="timeline-date text-black">Sep 2025 - Dec 2025</div>
-              <h3 className="timeline-title text-black">AI Engineer</h3>
-              <div className="timeline-organization text-black">The Polis Center</div>
-              <p className="mb-3 text-black">
+              <div className="timeline-date">Sep 2025 - Dec 2025</div>
+              <h3 className="timeline-title">AI Engineer</h3>
+              <div className="timeline-organization">The Polis Center</div>
+              <p className="mb-3 text-muted-foreground text-sm">
                 Architecting intelligent ML platforms bridging civic data and AI tooling.
               </p>
-              <ul className="list-disc pl-5 mb-4 text-black">
+              <ul className="list-disc pl-5 mb-4 text-muted-foreground text-sm space-y-1">
                 <li>Leveraged Hugging Face products, Transformers, and core AI engineering concepts.</li>
               </ul>
             </div>
 
             <div className="timeline-item animate-fade-in">
               <div className="timeline-dot"></div>
-              <div className="timeline-date text-black">May 2025 - Dec 2025</div>
-              <h3 className="timeline-title text-black">AI Data Engineer Intern</h3>
-              <div className="timeline-organization text-black">Horizon League</div>
-              <ul className="list-disc pl-5 mb-4 text-black">
+              <div className="timeline-date">May 2025 - Dec 2025</div>
+              <h3 className="timeline-title">AI Data Engineer Intern</h3>
+              <div className="timeline-organization">Horizon League</div>
+              <ul className="list-disc pl-5 mb-4 text-muted-foreground text-sm space-y-1">
                 <li>Built an end-to-end Deal Analytics app and developed semantic sentence segmentation using LLMs.</li>
                 <li>Replaced 3-4 days of manual spreadsheet work per reporting cycle with unified SQL models and near-real-time BI dashboards.</li>
               </ul>
@@ -229,10 +229,10 @@ const Home = () => {
 
             <div className="timeline-item animate-fade-in">
               <div className="timeline-dot"></div>
-              <div className="timeline-date text-black">Aug 2024 - Dec 2025</div>
-              <h3 className="timeline-title text-black">Lead AI Engineer</h3>
-              <div className="timeline-organization text-black">COMET LAB IU</div>
-              <ul className="list-disc pl-5 mb-4 text-black">
+              <div className="timeline-date">Aug 2024 - Dec 2025</div>
+              <h3 className="timeline-title">Lead AI Engineer</h3>
+              <div className="timeline-organization">COMET LAB IU</div>
+              <ul className="list-disc pl-5 mb-4 text-muted-foreground text-sm space-y-1">
                 <li>Engineered a GPT-4o-powered accessibility pipeline with Pydantic validation.</li>
                 <li>Reduced manual WCAG remediation time by 93% across 1,400+ documents and 6 institutional departments.</li>
               </ul>
@@ -240,10 +240,10 @@ const Home = () => {
 
             <div className="timeline-item animate-fade-in">
               <div className="timeline-dot"></div>
-              <div className="timeline-date text-black">Jul 2020 - Aug 2024</div>
-              <h3 className="timeline-title text-black">Senior Software Engineer - Data Automation</h3>
-              <div className="timeline-organization text-black">Eurofins IT, Bangalore, India</div>
-              <ul className="list-disc pl-5 mb-4 text-black">
+              <div className="timeline-date">Jul 2020 - Aug 2024</div>
+              <h3 className="timeline-title">Senior Software Engineer - Data Automation</h3>
+              <div className="timeline-organization">Eurofins IT, Bangalore, India</div>
+              <ul className="list-disc pl-5 mb-4 text-muted-foreground text-sm space-y-1">
                 <li>Designed a scalable nightly batch anomaly detection pipeline processing ~300M events/month.</li>
                 <li>Managed cross-functional teams, overseeing multi-country SharePoint migrations (6TB of docs to Azure).</li>
                 <li>Architected a hybrid SARIMA-XGBoost pipeline for 18-server SharePoint farms achieving 4.8% MAPE.</li>
@@ -252,10 +252,10 @@ const Home = () => {
             
             <div className="timeline-item animate-fade-in">
               <div className="timeline-dot"></div>
-              <div className="timeline-date text-black">Jun 2018 - Jun 2020</div>
-              <h3 className="timeline-title text-black">Software Engineer</h3>
-              <div className="timeline-organization text-black">Eurofins IT, Bangalore, India</div>
-              <ul className="list-disc pl-5 mb-4 text-black">
+              <div className="timeline-date">Jun 2018 - Jun 2020</div>
+              <h3 className="timeline-title">Software Engineer</h3>
+              <div className="timeline-organization">Eurofins IT, Bangalore, India</div>
+              <ul className="list-disc pl-5 mb-4 text-muted-foreground text-sm space-y-1">
                 <li>Automated user support request solutions, reducing volume by 32%.</li>
                 <li>Built a travel request portal and automated Azure DevOps CI/CD pipelines.</li>
               </ul>
@@ -265,26 +265,26 @@ const Home = () => {
       </section>
 
       {/* Certifications Preview Section */}
-      <section className="section-container bg-secondary">
+      <section className="section-container bg-secondary/40">
         <h2 className="section-title text-center mb-12">Certifications Spotlight</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in text-center flex flex-col items-center">
+          <div className="bg-card rounded-xl p-6 shadow-card hover:shadow-hover transition-all duration-300 hover:-translate-y-0.5 animate-fade-in text-center flex flex-col items-center border border-border">
             <CheckCircle className="w-10 h-10 text-primary mb-4" />
-            <h3 className="text-lg font-bold mb-2">Graph Data Science Certification</h3>
-            <p className="text-black font-semibold">Neo4j (Mar 2026)</p>
+            <h3 className="text-base font-bold mb-1">Graph Data Science Certification</h3>
+            <p className="text-muted-foreground text-sm">Neo4j · Mar 2026</p>
           </div>
           
-          <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in text-center flex flex-col items-center" style={{animationDelay: "200ms"}}>
-            <CheckCircle className="w-10 h-10 text-data-accent mb-4" />
-            <h3 className="text-lg font-bold mb-2">AI Agents Fundamentals</h3>
-            <p className="text-black font-semibold">Hugging Face (Mar 2026)</p>
+          <div className="bg-card rounded-xl p-6 shadow-card hover:shadow-hover transition-all duration-300 hover:-translate-y-0.5 animate-fade-in text-center flex flex-col items-center border border-border" style={{animationDelay: "200ms"}}>
+            <CheckCircle className="w-10 h-10 text-accent mb-4" />
+            <h3 className="text-base font-bold mb-1">AI Agents Fundamentals</h3>
+            <p className="text-muted-foreground text-sm">Hugging Face · Mar 2026</p>
           </div>
           
-          <div className="bg-card rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow animate-fade-in text-center flex flex-col items-center" style={{animationDelay: "400ms"}}>
+          <div className="bg-card rounded-xl p-6 shadow-card hover:shadow-hover transition-all duration-300 hover:-translate-y-0.5 animate-fade-in text-center flex flex-col items-center border border-border" style={{animationDelay: "400ms"}}>
             <CheckCircle className="w-10 h-10 text-primary mb-4" />
-            <h3 className="text-lg font-bold mb-2">Data Engineering Foundations</h3>
-            <p className="text-black font-semibold">IBM Specialization</p>
+            <h3 className="text-base font-bold mb-1">Data Engineering Foundations</h3>
+            <p className="text-muted-foreground text-sm">IBM Specialization</p>
           </div>
         </div>
         
@@ -297,21 +297,24 @@ const Home = () => {
 
       {/* Contact CTA Section */}
       <section className="section-container bg-background">
-        <div className="bg-data-blue text-white rounded-xl p-8 md:p-12 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Build?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            From deploying scalable ETL and Spark clusters to optimizing PyTorch endpoints and AI Agents. Let's discuss your next massive data challenge.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button asChild size="lg" className="border-white text-white hover:bg-white/10">
-              <Link to="/contact">Get in Touch</Link>
-            </Button>
-            <Button asChild size="lg" className="border-white text-white hover:bg-white/10">
-              <a href={RESUME_URL} target="_blank" rel="noopener noreferrer">
-                <Download className="mr-2 h-5 w-5" />
-                Download Resume
-              </a>
-            </Button>
+        <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-700 to-teal-600 text-white rounded-2xl p-8 md:p-14 text-center">
+          <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+          <div className="relative z-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Build?</h2>
+            <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-blue-100">
+              From deploying scalable ETL and Spark clusters to optimizing PyTorch endpoints and AI Agents. Let's discuss your next massive data challenge.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button asChild size="lg" className="bg-white text-blue-700 hover:bg-blue-50 font-semibold shadow-soft">
+                <Link to="/contact">Get in Touch</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="border-white/40 text-white hover:bg-white/10 backdrop-blur-sm">
+                <a href={RESUME_URL} target="_blank" rel="noopener noreferrer">
+                  <Download className="mr-2 h-5 w-5" />
+                  Download Resume
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </section>

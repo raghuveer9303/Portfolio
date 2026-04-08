@@ -26,7 +26,7 @@ const ProjectCard = ({
 }: ProjectCardProps) => {
   return (
     <div 
-      className="group rounded-xl bg-card shadow-card hover:shadow-hover transition-all duration-300 overflow-hidden"
+      className="group rounded-xl bg-card border border-border shadow-card hover:shadow-hover transition-all duration-300 overflow-hidden hover:-translate-y-0.5"
       style={{ animationDelay: `${delay}ms` }}
     >
       <div className="aspect-video overflow-hidden">
@@ -38,14 +38,14 @@ const ProjectCard = ({
       </div>
       
       <div className="p-6">
-        <h3 className="text-xl font-bold mb-2">{title}</h3>
-        <p className="text-black mb-4">{description}</p>
+        <h3 className="text-lg font-bold mb-2 text-card-foreground">{title}</h3>
+        <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{description}</p>
         
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-1.5 mb-4">
           {technologies.map((tech) => (
             <span
               key={tech}
-              className="text-xs px-3 py-1 rounded-full bg-primary/10 text-black"
+              className="text-xs px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-medium"
             >
               {tech}
             </span>
@@ -58,9 +58,9 @@ const ProjectCard = ({
               asChild
               variant="outline"
               size="sm"
-              className="flex items-center gap-2 hover:bg-primary hover:text-primary-foreground"
+              className="flex items-center gap-2 hover:bg-primary hover:text-white hover:border-primary transition-all"
             >
-              <a href={github} target="_blank" rel="noopener noreferrer" className="text-black">
+              <a href={github} target="_blank" rel="noopener noreferrer">
                 <Github className="w-4 h-4" />
                 Code
               </a>
@@ -70,9 +70,9 @@ const ProjectCard = ({
             <Button
               asChild
               size="sm"
-              className="flex items-center gap-2 bg-primary hover:bg-primary-hover"
+              className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white"
             >
-              <a href={live} target="_blank" rel="noopener noreferrer" className="text-black">
+              <a href={live} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="w-4 h-4" />
                 Live Demo
               </a>

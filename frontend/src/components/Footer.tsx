@@ -39,8 +39,8 @@ const Footer = () => {
             <Link to="/" className="text-2xl font-heading font-bold text-foreground hover:text-primary transition-colors">
               RV
             </Link>
-            <p className="text-black max-w-xs">
-              Data Professional & Software Engineer specializing in data automation and scalable solutions.
+            <p className="text-muted-foreground text-sm max-w-xs">
+              AI Engineer & Data Scientist specializing in end-to-end ML systems and scalable data infrastructure.
             </p>
           </div>
 
@@ -52,7 +52,7 @@ const Footer = () => {
                 <li key={item.name}>
                   <Link
                     to={item.href}
-                    className="text-black hover:text-primary transition-colors"
+                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                   >
                     {item.name}
                   </Link>
@@ -71,7 +71,7 @@ const Footer = () => {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="text-black hover:text-primary transition-colors"
+                    className="text-muted-foreground hover:text-primary transition-colors"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={item.name}
@@ -87,10 +87,10 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="mt-12 pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-black text-sm">
+            <p className="text-muted-foreground text-sm">
               © {currentYear} Raghuveer Venkatesh. All rights reserved.
             </p>
-            <div className="flex space-x-6 text-sm text-black">
+            <div className="flex space-x-6 text-sm text-muted-foreground">
               <a href="#" className="hover:text-primary transition-colors">
                 Privacy Policy
               </a>

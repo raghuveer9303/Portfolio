@@ -104,9 +104,9 @@ const Projects = () => {
     : projects.filter(project => project.category === activeFilter);
 
   return (
-    <div className="container mx-auto px-4 py-16 md:py-24">
+    <div className="container mx-auto px-4 py-16 md:py-24 pt-28">
       <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">Engineering The Solutions</h1>
-      <p className="text-lg text-black text-center mb-12 max-w-2xl mx-auto">
+      <p className="text-base text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
         A collection of my mission-critical work across scalable Data Engineering, AI Agents, and full-stack MLOps architectures. Each project aims to solve complex problems with efficient, deployable solutions.
       </p>
 
